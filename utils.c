@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 18:01:03 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/13 22:34:37 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/16 02:08:35 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,10 @@ void ft_fill_pixel(t_data *data, int x, int y, char type)
 		j = 0;
 		while (j < TILE_SIZE)
 		{
-			if (i == 0 || i == TILE_SIZE - 1 || j == 0 || j == TILE_SIZE - 1)
-				mlx_pixel_put(data->mlx_ptr, data->win_ptr, x + i, y + j, 0x737373);
-			else
-			{
-				if (type == '1')
-					mlx_pixel_put(data->mlx_ptr, data->win_ptr, x + i, y + j, 0x00FFFFFF);
-				else if (type == '0')
-					mlx_pixel_put(data->mlx_ptr, data->win_ptr, x + i, y + j, 0x00000000);
-			}
+			if (type == '1')
+				data->mlx_o_data[(y + j) * 1920 + (x + i)] = 0x00FFFFFF;
+			else if (type == '0')
+				data->mlx_o_data[(y + j) * 1920 + (x + i)] = 0x00000000;
 			j++;
 		}
 		i++;
@@ -47,45 +42,37 @@ void	store_ray(t_data *data, int x, int y, int x2, int y2, int i)
 	data->ray->log[i][3] = y2;
 }
 
-void	ft_mlx_print_line(t_data *data, int x, int y, int x2, int y2, int color)
+double	ft_ray_length(float x1, float y1, float x2, float y2)
 {
-	int		dx;
-	int		dy;
-	int		sx;
-	int		sy;
-	int		err;
-	int		e2;
-	int		px;
-	int		py;
+	return (sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2)));
+}
 
-	px = data->pos_x;
-	py = data->pos_y;
-	dx = abs(x2 - x);
-	sx = x < x2 ? 1 : -1;
-	dy = -abs(y2 - y);
-	sy = y < y2 ? 1 : -1;
-	err = dx + dy;
-	while (1)
+void	ft_fill_floor_and_ceiling(t_data *data)
+{
+	int i;
+	int n;
+
+	i = 0;
+	n = 0;
+	while (i < 1080 / 2)
 	{
-		int m = (int)px / TILE_SIZE;
-		int n = (int)py / TILE_SIZE;
-		if (data->map->map[n][m] == '1')
-			break ;
-		mlx_pixel_put(data->mlx_ptr, data->win_ptr, x, y, color);
-		if (x == x2 && y == y2)
-			break ;
-		e2 = 2 * err;
-		if (e2 >= dy)
+		n = 0;
+		while (n < 1920)
 		{
-			err += dy;
-			x += sx * 12;
+			data->mlx_o_data[i * 1920 + n] = 0x00575757;
+			n++;
 		}
-		if (e2 <= dx)
+		i++;
+	}
+	while (i < 1080)
+	{
+		n = 0;
+		while (n < 1920)
 		{
-			err += dx;
-			y += sy * 12;
+			data->mlx_o_data[i * 1920 + n] = 0x005b95b0;
+			n++;
 		}
-		px = x;
-		py = y;
+		i++;
 	}
 }
+

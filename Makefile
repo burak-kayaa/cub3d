@@ -1,10 +1,10 @@
-SRCS	= main.c init.c mlx_funcs.c utils.c render.c #key.c map.c parse.c render.c sprite.c texture.c utils.c
+SRCS	= main.c init.c mlx_funcs.c utils.c render.c draw.c move.c #key.c map.c parse.c render.c sprite.c texture.c utils.c
 OBJS	= $(SRCS:.c=.o)
 
 # Path: src/Makefile
 NAME	= cub3D
 CC		= gcc
-CFLAGS	= -Wall -Wextra -Werror #-fsanitize=address -g
+CFLAGS	= -Wall -Wextra -Werror -fsanitize=address -g -o3
 RM		= rm -f
 MLX		= ./mlx/libmlx.a
 MLX_DIR	= ./mlx

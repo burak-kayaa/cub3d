@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 18:01:58 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/13 18:02:11 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/16 01:14:00 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@ void	ft_render_map(t_data *data)
 	int	j;
 	int	k;
 
+	// fill the board with black
+	ft_fill_floor_and_ceiling(data);
+	
 	k = 0;
 	i = 0;
 	while (data->map->map[i])
@@ -25,7 +28,7 @@ void	ft_render_map(t_data *data)
 		j = 0;
 		while (data->map->map[i][j])
 		{
-			ft_fill_pixel(data, j * 64, i * 64, data->map->map[i][j]);
+			ft_fill_pixel(data, j * TILE_SIZE, i * TILE_SIZE, data->map->map[i][j]);
 			j++;
 		}
 		i++;

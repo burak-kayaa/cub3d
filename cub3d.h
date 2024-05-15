@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 16:07:35 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/13 22:25:00 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/16 02:30:17 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,11 @@
 # define ESC_KEY 53
 # define LEFT_ARROW 123
 # define RIGHT_ARROW 124
-# define TILE_SIZE 64
-# define TOTAL_RAYS 60
+# define TILE_SIZE 16
+# define TOTAL_RAYS 1920
+# define PLAYER_SPEED 1
+# define PLAYER_SIZE 5
+# define TOTAL_TEXTURES 4
 
 # include <stdio.h>
 # include <unistd.h>
@@ -49,23 +52,37 @@ typedef struct s_ray
 	int	  **log;
 }	t_ray;
 
+typedef struct s_images
+{
+	void	*img;
+	int		*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+	int		width;
+	int		height;
+}				t_images;
+
 typedef struct s_data
 {
-	void	*mlx_ptr;
-	void	*win_ptr;
-	float	pos_x;
-	float	pos_y;
-	float	delta_x;
-	float	delta_y;
-	float	angle;
-	t_bool	w_pressed;
-	t_bool	a_pressed;
-	t_bool	s_pressed;
-	t_bool	d_pressed;
-	t_bool	left_pressed;
-	t_bool	right_pressed;
-	t_map	*map;
-	t_ray	*ray;
+	void		*mlx_ptr;
+	void		*win_ptr;
+	void		*mlx_img;
+	int			*mlx_o_data;
+	float		pos_x;
+	float		pos_y;
+	float		delta_x;
+	float		delta_y;
+	float		angle;
+	t_bool		w_pressed;
+	t_bool		a_pressed;
+	t_bool		s_pressed;
+	t_bool		d_pressed;
+	t_bool		left_pressed;
+	t_bool		right_pressed;
+	t_map		*map;
+	t_ray		*ray;
+	t_images	**images;
 }
 				t_data;
 void	ft_init(t_data *data, char *file);
@@ -75,12 +92,16 @@ int	ft_exit(void *param);
 int	key_hook(void *param);
 int	key_pressed(int keycode, void *param);
 int	key_released(int keycode, void *param);
+
 /* UTILS */
-void ft_fill_pixel(t_data *data, int x, int y, char type);
+void	ft_fill_pixel(t_data *data, int x, int y, char type);
 void	ft_mlx_print_line(t_data *data, int x, int y, int x2, int y2, int color);
 void	store_ray(t_data *data, int x, int y, int x2, int y2, int i);
+void	ft_fill_floor_and_ceiling(t_data *data);
+double	ft_ray_length(float x1, float y1, float x2, float y2);
 
 /* RENDER */
 void	ft_render_map(t_data *data);
+int ft_player_move(t_data *data);
 
 #endif
