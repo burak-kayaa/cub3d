@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 02:08:21 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/16 02:25:02 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/16 02:54:32 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,6 @@ void	ft_mlx_print_line(t_data *data, int x, int y, int x2, int y2, int n)
 			ft_draw_vertical_image(data, px, py, n);
 			break ;
 		}
-		if (x == x2 && y == y2)
-			break ;
 		e2 = 2 * err;
 		if (e2 >= dy)
 		{
