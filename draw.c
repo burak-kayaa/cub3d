@@ -6,13 +6,13 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 02:08:21 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/16 02:54:32 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/16 09:18:31 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void ft_draw_vertical_image(t_data *data, int x, int y, int n)
+static void ft_draw_vertical_image(t_data *data, int x, int y, int n, int direction)
 {
 	double distance;
 	double px;
@@ -27,12 +27,53 @@ static void ft_draw_vertical_image(t_data *data, int x, int y, int n)
 	distance = 12000 / ft_ray_length(data->pos_x, data->pos_y, px, py);
 	draw_start = (1080 / 2) - (distance / 2) * 2;
 	draw_end = (1080 / 2) + (distance / 2) * 2;
-	while (draw_start < draw_end)
+	if (direction == DIR_NORTH)
 	{
-		if ((int)draw_start * 1920 + n < 1920 * 1080 && (int)draw_start * 1920 + n > 0)
-			data->mlx_o_data[(int)draw_start * 1920 + n] = data->images[1]->addr[(int)((i * 64) % 64) + 32];
-		draw_start++;
-		i++;
+		while (draw_start < draw_end)
+		{
+			if (i >= 64)
+				i = 0;
+			if ((int)draw_start * 1920 + n < 1920 * 1080 && (int)draw_start * 1920 + n > 0)
+				data->mlx_o_data[(int)draw_start * 1920 + n] = data->images[1]->addr[(i * 64) + n % 64];
+			draw_start++;
+			i++;
+		}	
+	}
+	else if (direction == DIR_SOUTH)
+	{
+		while (draw_start < draw_end)
+		{
+			if (i >= 64)
+				i = 0;
+			if ((int)draw_start * 1920 + n < 1920 * 1080 && (int)draw_start * 1920 + n > 0)
+				data->mlx_o_data[(int)draw_start * 1920 + n] = data->images[4]->addr[(i * 64) + n % 64];
+			draw_start++;
+			i++;
+		}
+	}
+	else if (direction == DIR_WEST)
+	{
+		while (draw_start < draw_end)
+		{
+			if (i >= 64)
+				i = 0;
+			if ((int)draw_start * 1920 + n < 1920 * 1080 && (int)draw_start * 1920 + n > 0)
+				data->mlx_o_data[(int)draw_start * 1920 + n] = data->images[3]->addr[(i * 64) + n % 64];
+			draw_start++;
+			i++;
+		}
+	}
+	else if (direction == DIR_EAST)
+	{
+		while (draw_start < draw_end)
+		{
+			if (i >= 64)
+				i = 0;
+			if ((int)draw_start * 1920 + n < 1920 * 1080 && (int)draw_start * 1920 + n > 0)
+				data->mlx_o_data[(int)draw_start * 1920 + n] = data->images[2]->addr[(i * 64) + n % 64];
+			draw_start++;
+			i++;
+		}
 	}
 }
 
@@ -58,9 +99,9 @@ void	ft_mlx_print_line(t_data *data, int x, int y, int x2, int y2, int n)
 	{
 		if (data->map->map[(int)py / TILE_SIZE][(int)px / TILE_SIZE] == '1')
 		{
-			data->mlx_o_data[py * 1920 + px] = 0x00FF0000;
+			// data->mlx_o_data[py * 1920 + px] = 0x00FF0000;
 			store_ray(data, x, y, px, py, n);
-			ft_draw_vertical_image(data, px, py, n);
+			ft_draw_vertical_image(data, px, py, n, DIR_NORTH);
 			break ;
 		}
 		e2 = 2 * err;

@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 16:07:35 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/16 02:30:17 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/16 09:08:25 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@
 # define PLAYER_SPEED 1
 # define PLAYER_SIZE 5
 # define TOTAL_TEXTURES 4
+# define DIR_NORTH 0
+# define DIR_SOUTH 1
+# define DIR_WEST 2
+# define DIR_EAST 3
 
 # include <stdio.h>
 # include <unistd.h>

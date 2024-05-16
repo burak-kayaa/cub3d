@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 17:59:24 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/16 02:41:19 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/16 09:12:09 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int	key_hook(void *param)
 		float x2 = data->pos_x + data->delta_x * 10;
 		float y2 = data->pos_y + data->delta_y * 10;
 		float angle = data->angle - (M_PI / 6) + (M_PI / 3) * n / TOTAL_RAYS;
+		data->ray->rayAngle = angle;
 		printf("angle: %f\n", angle);
 		float delta_x = cos(angle) * 5;
 		float delta_y = sin(angle) * 5;
