@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 02:09:47 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/16 02:21:02 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/16 03:51:43 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,13 @@ int ft_player_check(t_data *data)
 	}
 	if (data->a_pressed)
 	{
-		new_x -= data->delta_y * 2;
-		new_y += data->delta_x * 2;
+		new_x += data->delta_y * 2;
+		new_y -= data->delta_x * 2;
 	}
 	if (data->d_pressed)
 	{
-		new_x += data->delta_y * 2;
-		new_y -= data->delta_x * 2;
+		new_x -= data->delta_y * 2;
+		new_y += data->delta_x * 2;
 	}
 
 	if (data->map->map[(int)(new_y / TILE_SIZE)][(int)(new_x / TILE_SIZE)] == '1')
