@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 02:10:46 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/16 02:11:05 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/16 14:18:03 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	main(int argc, char **argv)
 	ft_init(data, argv[1]);
 	mlx_pixel_put(data->mlx_ptr, data->win_ptr, data->pos_x, \
 		data->pos_y, 0x00FF0000);
+	mlx_mouse_move(data->win_ptr, data->pos_x, data->pos_y);
 	mlx_loop_hook(data->mlx_ptr, key_hook, data);
 	mlx_hook(data->win_ptr, 3, 0, key_released, data);
 	mlx_hook(data->win_ptr, 2, 0, key_pressed, data);

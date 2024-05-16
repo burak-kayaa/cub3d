@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 16:07:35 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/16 09:08:25 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/16 14:17:02 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,14 +98,13 @@ int	key_pressed(int keycode, void *param);
 int	key_released(int keycode, void *param);
 
 /* UTILS */
-void	ft_fill_pixel(t_data *data, int x, int y, char type);
 void	ft_mlx_print_line(t_data *data, int x, int y, int x2, int y2, int color);
 void	store_ray(t_data *data, int x, int y, int x2, int y2, int i);
 void	ft_fill_floor_and_ceiling(t_data *data);
 double	ft_ray_length(float x1, float y1, float x2, float y2);
 
 /* RENDER */
-void	ft_render_map(t_data *data);
+void	ft_render_map(t_data *data, int render_fc);
 int ft_player_move(t_data *data);
-
+void ft_draw_square_on_coords(t_data *data, int x, int y, int color);
 #endif

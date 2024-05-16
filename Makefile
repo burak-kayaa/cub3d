@@ -4,7 +4,7 @@ OBJS	= $(SRCS:.c=.o)
 # Path: src/Makefile
 NAME	= cub3D
 CC		= gcc
-CFLAGS	= -Wall -Wextra -Werror -fsanitize=address -g -o3
+CFLAGS	= -Wall -Wextra -Werror  -g -o3 -fsanitize=address
 RM		= rm -f
 MLX		= ./mlx/libmlx.a
 MLX_DIR	= ./mlx
