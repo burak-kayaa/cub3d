@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 17:59:24 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/16 13:54:31 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/16 14:18:42 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	key_hook(void *param)
 		n++;
 	}
 	ft_render_map(data, 0);
-	ft_draw_square_on_coords(data, data->pos_x, data->pos_y, PLAYER_SIZE, 0x0000FF00);
+	ft_draw_square_on_coords(data, data->pos_x, data->pos_y, 0x0000FF00);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->mlx_img, 0, 0);
 	return (0);
 }
