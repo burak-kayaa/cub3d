@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 16:16:01 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/20 17:23:59 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/20 19:25:06 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,11 @@ char	**ft_create_map(char *file)
 static int	ft_init_images(t_data *data)
 {
 	int i;
-	char *textures[5] = {"", "textures/text1.xpm", "textures/text2.xpm", "textures/text3.xpm", "textures/text4.xpm"};
-	
+	char *textures[15] = {"", "textures/text1.xpm", "textures/text2.xpm", "textures/text3.xpm", "textures/text4.xpm", "textures/anime1.xpm", "textures/anime2.xpm", "textures/anime3.xpm",
+	 "textures/anime4.xpm", "textures/anime5.xpm", "textures/anime6.xpm", "textures/anime7.xpm", "textures/anime8.xpm", "textures/anime9.xpm", "textures/anime10.xpm"};
+
 	data->images = malloc(sizeof(t_images *) * (TOTAL_TEXTURES + 1));
+	data->images[TOTAL_TEXTURES] = NULL;
 	i = 1;
 	while (i < TOTAL_TEXTURES + 1)
 	{
@@ -95,8 +97,10 @@ int	ft_init(t_data *data)
 	data->a_pressed = 0;
 	data->s_pressed = 0;
 	data->d_pressed = 0;
+	data->e_pressed = 0;
 	data->left_pressed = 0;
 	data->right_pressed = 0;
+	data->is_door_open = 0;
 	data->ray = malloc(sizeof(t_ray));
 	ft_init_ray(data->ray);
 	data->map = malloc(sizeof(t_map));

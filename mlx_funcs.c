@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 17:59:24 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/20 17:13:11 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/20 19:08:53 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ int	key_pressed(int keycode, void *param)
 		data->left_pressed = 1;
 	if (keycode == RIGHT_ARROW)
 		data->right_pressed = 1;
+	if (keycode == E_KEY)
+		data->e_pressed = 1;
 	return (0);
 }
 
@@ -76,5 +78,7 @@ int	key_released(int keycode, void *param)
 		data->left_pressed = 0;
 	if (keycode == RIGHT_ARROW)
 		data->right_pressed = 0;
+	if (keycode == E_KEY)
+		data->e_pressed = 0;
 	return (0);
 }

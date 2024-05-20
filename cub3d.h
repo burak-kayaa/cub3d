@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 16:07:35 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/20 17:24:05 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/20 19:14:04 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,13 @@
 # define S_KEY 1
 # define D_KEY 2
 # define ESC_KEY 53
+# define E_KEY 14
 # define LEFT_ARROW 123
 # define RIGHT_ARROW 124
 # define TILE_SIZE 16
 # define TOTAL_RAYS 1920
 # define PLAYER_SIZE 5
-# define TOTAL_TEXTURES 4
+# define TOTAL_TEXTURES 14
 # define SCREENHEIGHT 1080
 # define SCREENWIDTH 1920
 
@@ -104,6 +105,8 @@ typedef struct s_data
 	t_bool		a_pressed;
 	t_bool		s_pressed;
 	t_bool		d_pressed;
+	t_bool		e_pressed;
+	t_bool		is_door_open;
 	t_bool		left_pressed;
 	t_bool		right_pressed;
 	t_map		*map;
@@ -133,4 +136,5 @@ void	ft_render_map(t_data *data, int render_fc);
 int ft_player_move(t_data *data);
 void ft_draw_square_on_coords(t_data *data, int x, int y, int color);
 void	ft_ray_casting(t_data *data);
+void	ft_texture(t_data *data, int x);
 #endif

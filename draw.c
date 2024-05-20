@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 02:08:21 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/20 17:18:10 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/20 20:02:43 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,18 @@ void	ft_wallhit(t_data *data)
 			data->ray->mapy += data->ray->stepy;
 			data->ray->side = 1;
 		}
-		if (data->map->map[data->ray->mapx][data->ray->mapy] == '1')
-			data->ray->wall = 1;
+		if (data->map->map[data->ray->mapx][data->ray->mapy] == '1' || data->map->map[data->ray->mapx][data->ray->mapy] == '2')
+		{
+			if (data->map->map[data->ray->mapx][data->ray->mapy] == '2')
+			{
+				if (!data->is_door_open)
+					data->ray->wall = 2;
+				else
+					data->ray->wall = 3;
+			}
+			else
+				data->ray->wall = 1;
+		}
 	}
 }
 
@@ -77,59 +87,38 @@ void	ft_raydist(t_data *data)
 		data->ray->drawend = 1080 - 1;
 }
 
-static void	ft_texture_helper(t_data *data)
-{
-	double	wallx;
-
-	data->ray->texnum = data->map->map[data->ray->mapx][data->ray->mapy] - 1;
-	if (data->ray->side == 0)
-		wallx = data->ray->posy + data->ray->perpwalldist * data->ray->raydiry;
-	else
-		wallx = data->ray->posx + data->ray->perpwalldist * data->ray->raydirx;
-	wallx -= floor(wallx);
-	data->ray->tex_x = (int)(wallx * (double)64);
-	if (data->ray->side == 0 && data->ray->raydirx > 0)
-		data->ray->tex_x = 64 - data->ray->tex_x - 1;
-	if (data->ray->side == 1 && data->ray->raydiry < 0)
-		data->ray->tex_x = 64 - data->ray->tex_x - 1;
-	data->ray->texstep = 1.0 * 64 / data->ray->lineheight;
-	data->ray->texpos = (data->ray->drawstart - 1080 / 2 + data->ray->lineheight
-			/ 2) * data->ray->texstep;
-}
-
-void	ft_texture(t_data *data, int x)
-{
-	int	texy;
-
-	ft_texture_helper(data);
-	while (data->ray->drawstart < data->ray->drawend)
-	{
-		texy = (int)data->ray->texpos & 63;
-		data->ray->texpos += data->ray->texstep;
-		if (data->ray->side == 0 && data->ray->raydirx > 0)
-			data->mlx_o_data[data->ray->drawstart * SCREENWIDTH
-				+ x] = data->images[1]->addr[64 * texy + data->ray->tex_x];
-		else if (data->ray->side == 0 && data->ray->raydirx < 0)
-			data->mlx_o_data[data->ray->drawstart * SCREENWIDTH
-				+ x] = data->images[2]->addr[64 * texy + data->ray->tex_x];
-		else if (data->ray->side == 1 && data->ray->raydiry > 0)
-			data->mlx_o_data[data->ray->drawstart * SCREENWIDTH
-				+ x] = data->images[3]->addr[64 * texy + data->ray->tex_x];
-		else
-			data->mlx_o_data[data->ray->drawstart * SCREENWIDTH
-				+ x] = data->images[4]->addr[64 * texy + data->ray->tex_x];
-		data->ray->drawstart++;
-	}
-}
-
-
-
-
 void	ft_send_ray(t_data *data, int x)
 {
 	ft_direction(data);
 	ft_wallhit(data);
 	ft_raydist(data);
+	if (data->ray->wall == 3 && data->ray->perpwalldist < 1.5 && !data->e_pressed)
+	{
+		data->ray->wall = 0;
+		data->is_door_open = 0;
+		ft_wallhit(data);
+		ft_raydist(data);
+	}
+	if (data->e_pressed && data->ray->wall == 2 && data->ray->perpwalldist < 1.5)
+	{
+		data->ray->wall = 0;
+		data->is_door_open = 1;
+		ft_wallhit(data);
+		ft_raydist(data);
+	}
+	if (data->e_pressed && data->ray->wall == 3 && data->ray->perpwalldist < 1.5)
+	{
+		ft_wallhit(data);
+		ft_raydist(data);
+	}
+
+	// if (data->e_pressed && data->ray->wall == 2 && data->ray->perpwalldist < 1.5)
+	// {
+	// 	data->ray->wall = 0;
+	// 	ft_wallhit(data);
+	// 	ft_raydist(data);
+	// 	data->is_door_open = 1;
+	// }
 	ft_texture(data, x);
 }
 
