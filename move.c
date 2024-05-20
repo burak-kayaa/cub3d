@@ -6,11 +6,132 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 02:09:47 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/16 14:17:46 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/20 17:23:37 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int	is_character(char c)
+{
+	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
+		return (1);
+	return (0);
+}
+
+static void	key_w(t_data *data)
+{
+	if (data->map->map[(int)(data->ray->posx + data->ray->dirx
+			* 0.08)][(int)(data->ray->posy)] == '0'
+		|| is_character(data->map->map[(int)(data->ray->posx + data->ray->dirx
+				* 0.08)][(int)(data->ray->posy)]))
+		data->ray->posx += data->ray->dirx * 0.08;
+	if (data->map->map[(int)data->ray->posx][(int)(data->ray->posy
+		+ data->ray->diry * 0.08)] == '0'
+		|| is_character(data->map->map[(int)data->ray->posx][(int)(data->ray->posy
+				+ data->ray->diry * 0.08)]))
+		data->ray->posy += data->ray->diry * 0.08;
+}
+
+static void	key_s(t_data *data)
+{
+	if (data->map->map[(int)(data->ray->posx - data->ray->dirx
+			* 0.08)][(int)(data->ray->posy)] == '0'
+		|| is_character(data->map->map[(int)(data->ray->posx - data->ray->dirx
+				* 0.08)][(int)(data->ray->posy)]))
+		data->ray->posx -= data->ray->dirx * 0.08;
+	if (data->map->map[(int)(data->ray->posx)][(int)(data->ray->posy
+			- data->ray->diry * 0.08)] == '0'
+		|| is_character(data->map->map[(int)(data->ray->posx)][
+			(int)(data->ray->posy - data->ray->diry * 0.08)]))
+		data->ray->posy -= data->ray->diry * 0.08;
+}
+
+static void	key_a(t_data *data)
+{
+	if (data->map->map[(int)(data->ray->posx + data->ray->diry
+			* 0.08)][(int)(data->ray->posy)] == '0'
+		|| is_character(data->map->map[(int)(data->ray->posx + data->ray->diry
+				* 0.08)][(int)(data->ray->posy)]))
+		data->ray->posx += data->ray->diry * 0.08;
+	if (data->map->map[(int)(data->ray->posx)][(int)(data->ray->posy
+			- data->ray->dirx * 0.08)] == '0'
+		|| is_character(data->map->map[(int)(data->ray->posx)]
+		[(int)(data->ray->posy - data->ray->dirx * 0.08)]))
+		data->ray->posy -= data->ray->dirx * 0.08;
+}
+
+static void	key_d(t_data *data)
+{
+	if (data->map->map[(int)(data->ray->posx - data->ray->diry
+			* 0.08)][(int)(data->ray->posy)] == '0'
+		|| is_character(data->map->map[(int)(data->ray->posx - data->ray->diry
+				* 0.08)][(int)(data->ray->posy)]))
+		data->ray->posx -= data->ray->diry * 0.08;
+	if (data->map->map[(int)(data->ray->posx)][(int)(data->ray->posy
+			+ data->ray->dirx * 0.08)] == '0'
+		|| is_character(data->map->map[(int)(data->ray->posx)]
+		[(int)(data->ray->posy + data->ray->dirx * 0.08)]))
+		data->ray->posy += data->ray->dirx * 0.08;
+}
+
+void	key_left(t_data *data)
+{
+	double	old_dirx;
+	double	old_planex;
+
+	old_dirx = data->ray->dirx;
+	data->ray->dirx = data->ray->dirx * cos(0.09) - data->ray->diry
+		* sin(0.09);
+	data->ray->diry = old_dirx * sin(0.09) + data->ray->diry
+		* cos(0.09);
+	old_planex = data->ray->planex;
+	data->ray->planex = data->ray->planex * cos(0.09) - data->ray->planey
+		* sin(0.09);
+	data->ray->planey = old_planex * sin(0.09) + data->ray->planey
+		* cos(0.09);
+}
+
+void	key_right(t_data *data)
+{
+	double	old_dirx;
+	double	old_planex;
+
+	old_dirx = data->ray->dirx;
+	data->ray->dirx = data->ray->dirx * cos(-0.05) - data->ray->diry
+		* sin(-0.05);
+	data->ray->diry = old_dirx * sin(-0.05) + data->ray->diry
+		* cos(-0.05);
+	old_planex = data->ray->planex;
+	data->ray->planex = data->ray->planex * cos(-0.05) - data->ray->planey
+		* sin(-0.05);
+	data->ray->planey = old_planex * sin(-0.05) + data->ray->planey
+		* cos(-0.05);
+}
+
+void	ft_move(t_data *data)
+{
+	if (data->w_pressed)
+		key_w(data);
+	if (data->s_pressed)
+		key_s(data);
+	if (data->left_pressed)
+		key_left(data);
+	if (data->right_pressed)
+		key_right(data);
+	if (data->a_pressed)
+		key_a(data);
+	if (data->d_pressed)
+		key_d(data);
+}
+
+int	ft_player_move(t_data *data)
+{
+	ft_move(data);
+	ft_draw_square_on_coords(data, data->ray->posy * TILE_SIZE,
+		data->ray->posx * TILE_SIZE, 0x00000000);
+	return (0);
+}
 
 void	ft_draw_square_on_coords(t_data *data, int x, int y, int color)
 {
@@ -32,84 +153,4 @@ void	ft_draw_square_on_coords(t_data *data, int x, int y, int color)
 		}
 		i++;
 	}
-}
-
-int	mouse_hook(t_data *data)
-{
-	int	*x;
-	int	*y;
-
-	x = malloc(sizeof(int));
-	y = malloc(sizeof(int));
-	mlx_mouse_get_pos(data->win_ptr, x, y);
-	if (*x > 1100)
-		data->right_pressed = 1;
-	else if (*x < 800)
-		data->left_pressed = 1;
-	else
-	{
-		data->right_pressed = 0;
-		data->left_pressed = 0;
-	}
-	return (free(x), free(y), 0);
-}
-
-int	ft_player_check(t_data *data)
-{
-	int	new_x;
-	int	new_y;
-
-	new_x = data->pos_x;
-	new_y = data->pos_y;
-	if (data->left_pressed)
-	{
-		data->angle -= 0.1;
-		if (data->angle < 0)
-			data->angle += 2 * M_PI;
-		data->delta_x = cos(data->angle) * 2;
-		data->delta_y = sin(data->angle) * 2;
-	}
-	if (data->right_pressed)
-	{
-		data->angle += 0.1;
-		if (data->angle > 2 * M_PI)
-			data->angle -= 2 * M_PI;
-		data->delta_x = cos(data->angle) * 2;
-		data->delta_y = sin(data->angle) * 2;
-	}
-	if (data->w_pressed)
-	{
-		new_x += data->delta_x;
-		new_y += data->delta_y;
-	}
-	if (data->s_pressed)
-	{
-		new_x -= data->delta_x;
-		new_y -= data->delta_y;
-	}
-	if (data->a_pressed)
-	{
-		new_x += data->delta_y;
-		new_y -= data->delta_x;
-	}
-	if (data->d_pressed)
-	{
-		new_x -= data->delta_y;
-		new_y += data->delta_x;
-	}
-	mouse_hook(data);
-	if (data->map->map[(int)(new_y / TILE_SIZE)][(int)(new_x / TILE_SIZE)] == '1')
-		return (1);
-	ft_draw_square_on_coords(data, data->pos_x, data->pos_y, 0x00000000);
-	data->pos_x = new_x;
-	data->pos_y = new_y;
-	return (0);
-}
-
-int	ft_player_move(t_data *data)
-{
-	if (ft_player_check(data))
-		return (1);
-	ft_draw_square_on_coords(data, data->pos_x, data->pos_y, 0x0000FF00);
-	return (0);
 }

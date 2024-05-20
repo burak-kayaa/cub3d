@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 18:01:58 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/16 12:34:06 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/20 17:17:23 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	ft_fill_pixel(t_data *data, int x, int y, char type)
 		{
 			if (type == '1')
 				data->mlx_o_data[(y + j) * 1920 + (x + i)] = 0x80FFFFFF;
-			else if (type == '0')
+			else
 				data->mlx_o_data[(y + j) * 1920 + (x + i)] = 0x80000000;
 			j++;
 		}

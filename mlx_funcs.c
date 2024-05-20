@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 17:59:24 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/16 14:18:42 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/20 17:13:11 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,42 +22,17 @@ int	ft_exit(void *param)
 	return (0);
 }
 
+
 int	key_hook(void *param)
 {
 	t_data	*data;
-	int	n;
 	data = (t_data *)param;
 	ft_render_map(data, 1);
 	if (ft_player_move(data))
 		return (1);
-	n = 0;
-	while (n < TOTAL_RAYS)
-	{
-		if (data->ray->log == NULL)
-			break;
-		if (data->ray->log[n] != NULL)
-			ft_mlx_print_line(data, data->ray->log[n][0], data->ray->log[n][1], data->ray->log[n][2], data->ray->log[n][3], 0x00000000);
-		n++;
-	}
-	n = 0;
-	data->ray->log = malloc(sizeof(int *) * TOTAL_RAYS);
-	while (n < TOTAL_RAYS)
-	{
-		float x = data->pos_x;
-		float y = data->pos_y;
-		float x2 = data->pos_x + data->delta_x * 10;
-		float y2 = data->pos_y + data->delta_y * 10;
-		float angle = data->angle - (M_PI / 6) + (M_PI / 3) * n / TOTAL_RAYS;
-		data->ray->rayAngle = angle;
-		float delta_x = cos(angle) * 5;
-		float delta_y = sin(angle) * 5;
-		x2 = data->pos_x + delta_x * 200;
-		y2 = data->pos_y + delta_y * 200;
-		ft_mlx_print_line(data, x, y, x2, y2, n);
-		n++;
-	}
+	ft_ray_casting(data);
 	ft_render_map(data, 0);
-	ft_draw_square_on_coords(data, data->pos_x, data->pos_y, 0x0000FF00);
+	ft_draw_square_on_coords(data, data->ray->posy * TILE_SIZE, data->ray->posx * TILE_SIZE, 0x0000FF00);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->mlx_img, 0, 0);
 	return (0);
 }

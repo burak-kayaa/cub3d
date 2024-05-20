@@ -6,92 +6,160 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 02:08:21 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/16 14:43:10 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/20 17:18:10 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void ft_draw_vertical_image(t_data *data, int x, int y, int n, int direction)
+void	ft_direction(t_data *data)
 {
-	double	distance;
-	double	draw_start;
-	double	draw_end;
-	int 	drawing;
-	int 	i;
-	float	ca;
-	int		len;
-	
-	i = 0;
-	len = ft_ray_length(data->pos_x, data->pos_y, x, y);
-	ca = data->angle - data->ray->rayAngle;
-	if (ca < 0)
-		ca += 2 * M_PI;
-	if (ca > 2 * M_PI)
-		ca -= 2 * M_PI;
-	len = len * cos(ca);
-	if (!len)
-		len = 1;
-	distance = 12000 / len;
-	draw_start = (1080 / 2) - (distance / 2) * 2;
-	draw_end = (1080 / 2) + (distance / 2) * 2;
-	drawing = (int)(draw_end - draw_start);
-	drawing = (drawing / 64);
-	if (!drawing)
-		drawing = 1;
-	if (direction == DIR_NORTH)
+	if (data->ray->raydirx < 0)
 	{
-		while (draw_start < draw_end)
-		{
-			if (i >= 64 * drawing)
-				i = 0;
-			if ((int)draw_start * 1920 + n < 1920 * 1080 && (int)draw_start * 1920 + n > 0)
-				data->mlx_o_data[(int)draw_start * 1920 + n] = data->images[1]->addr[(((int)i / drawing) * 64) + (32)];
-			draw_start++;
-			i++;
-		}
+		data->ray->stepx = -1;
+		data->ray->sidedistx = (data->ray->posx - data->ray->mapx)
+			* data->ray->deltadistx;
+	}
+	else
+	{
+		data->ray->stepx = 1;
+		data->ray->sidedistx = (data->ray->mapx + 1.0 - data->ray->posx)
+			* data->ray->deltadistx;
+	}
+	if (data->ray->raydiry < 0)
+	{
+		data->ray->stepy = -1;
+		data->ray->sidedisty = (data->ray->posy - data->ray->mapy)
+			* data->ray->deltadisty;
+	}
+	else
+	{
+		data->ray->stepy = 1;
+		data->ray->sidedisty = (data->ray->mapy + 1.0 - data->ray->posy)
+			* data->ray->deltadisty;
 	}
 }
 
-void	ft_mlx_print_line(t_data *data, int x, int y, int x2, int y2, int n)
+void	ft_wallhit(t_data *data)
 {
-	int		dx;
-	int		dy;
-	int		sx;
-	int		sy;
-	int		err;
-	int		e2;
-	int		px;
-	int		py;
-
-	px = data->pos_x;
-	py = data->pos_y;
-	dx = abs(x2 - x);
-	sx = x < x2 ? 1 : -1;
-	dy = -abs(y2 - y);
-	sy = y < y2 ? 1 : -1;
-	err = dx + dy;
-	while (1)
+	data->ray->wall = 0;
+	while (!data->ray->wall)
 	{
-		if (data->map->map[(int)py / TILE_SIZE][(int)px / TILE_SIZE] == '1')
+		if (data->ray->sidedistx < data->ray->sidedisty)
 		{
-			data->mlx_o_data[py * 1920 + px] = 0x00FF0000;
-			store_ray(data, x, y, px, py, n);
-			ft_draw_vertical_image(data, px, py, n, DIR_NORTH);
-			break ;
+			data->ray->sidedistx += data->ray->deltadistx;
+			data->ray->mapx += data->ray->stepx;
+			data->ray->side = 0;
 		}
-		e2 = 2 * err;
-		if (e2 >= dy)
+		else
 		{
-			err += dy;
-			x += sx;
+			data->ray->sidedisty += data->ray->deltadisty;
+			data->ray->mapy += data->ray->stepy;
+			data->ray->side = 1;
 		}
-		if (e2 <= dx)
-		{
-			err += dx;
-			y += sy;
-		}
-		px = x;
-		py = y;
+		if (data->map->map[data->ray->mapx][data->ray->mapy] == '1')
+			data->ray->wall = 1;
 	}
+}
+
+void	ft_raydist(t_data *data)
+{
+	if (data->ray->side == 0)
+		data->ray->perpwalldist = data->ray->sidedistx - data->ray->deltadistx;
+	else
+		data->ray->perpwalldist = data->ray->sidedisty - data->ray->deltadisty;
+	data->ray->lineheight = (int)(1080 / data->ray->perpwalldist * 2);
+	data->ray->drawstart = -data->ray->lineheight / 2 + 1080 / 2;
+	if (data->ray->drawstart < 0)
+		data->ray->drawstart = 0;
+	data->ray->drawend = data->ray->lineheight / 2 + 1080 / 2;
+	if (data->ray->drawend >= 1080)
+		data->ray->drawend = 1080 - 1;
+}
+
+static void	ft_texture_helper(t_data *data)
+{
+	double	wallx;
+
+	data->ray->texnum = data->map->map[data->ray->mapx][data->ray->mapy] - 1;
+	if (data->ray->side == 0)
+		wallx = data->ray->posy + data->ray->perpwalldist * data->ray->raydiry;
+	else
+		wallx = data->ray->posx + data->ray->perpwalldist * data->ray->raydirx;
+	wallx -= floor(wallx);
+	data->ray->tex_x = (int)(wallx * (double)64);
+	if (data->ray->side == 0 && data->ray->raydirx > 0)
+		data->ray->tex_x = 64 - data->ray->tex_x - 1;
+	if (data->ray->side == 1 && data->ray->raydiry < 0)
+		data->ray->tex_x = 64 - data->ray->tex_x - 1;
+	data->ray->texstep = 1.0 * 64 / data->ray->lineheight;
+	data->ray->texpos = (data->ray->drawstart - 1080 / 2 + data->ray->lineheight
+			/ 2) * data->ray->texstep;
+}
+
+void	ft_texture(t_data *data, int x)
+{
+	int	texy;
+
+	ft_texture_helper(data);
+	while (data->ray->drawstart < data->ray->drawend)
+	{
+		texy = (int)data->ray->texpos & 63;
+		data->ray->texpos += data->ray->texstep;
+		if (data->ray->side == 0 && data->ray->raydirx > 0)
+			data->mlx_o_data[data->ray->drawstart * SCREENWIDTH
+				+ x] = data->images[1]->addr[64 * texy + data->ray->tex_x];
+		else if (data->ray->side == 0 && data->ray->raydirx < 0)
+			data->mlx_o_data[data->ray->drawstart * SCREENWIDTH
+				+ x] = data->images[2]->addr[64 * texy + data->ray->tex_x];
+		else if (data->ray->side == 1 && data->ray->raydiry > 0)
+			data->mlx_o_data[data->ray->drawstart * SCREENWIDTH
+				+ x] = data->images[3]->addr[64 * texy + data->ray->tex_x];
+		else
+			data->mlx_o_data[data->ray->drawstart * SCREENWIDTH
+				+ x] = data->images[4]->addr[64 * texy + data->ray->tex_x];
+		data->ray->drawstart++;
+	}
+}
+
+
+
+
+void	ft_send_ray(t_data *data, int x)
+{
+	ft_direction(data);
+	ft_wallhit(data);
+	ft_raydist(data);
+	ft_texture(data, x);
+}
+
+void	ft_log_ray(t_data *data, int x)
+{
+	data->ray->log[x][0] = data->ray->mapx;
+	data->ray->log[x][1] = data->ray->mapy;
+	data->ray->log[x][2] = data->ray->mapx + data->ray->raydirx * 100;
+	data->ray->log[x][3] = data->ray->mapy + data->ray->raydiry * 100;
+}
+
+void	ft_ray_casting(t_data *data)
+{
+	int	x;
+
+	x = 0;
+	while (x < SCREENWIDTH)
+	{
+		data->ray->camerax = 2 * x / (double)SCREENWIDTH - 1;
+		data->ray->raydirx = data->ray->dirx + data->ray->planex
+			* data->ray->camerax;
+		data->ray->raydiry = data->ray->diry + data->ray->planey
+			* data->ray->camerax;
+		data->ray->mapx = (int)data->ray->posx;
+		data->ray->mapy = (int)data->ray->posy;
+		data->ray->deltadistx = fabs(1 / data->ray->raydirx);
+		data->ray->deltadisty = fabs(1 / data->ray->raydiry);
+		// ft_log_ray(data, x);
+		ft_send_ray(data, x);
+		x++;
+	}
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->mlx_img, 0, 0);
 }
