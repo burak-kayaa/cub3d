@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
+/*   By: egumus <egumus@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 02:08:21 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/20 20:02:43 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/22 01:36:31 by egumus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,11 @@ void	ft_send_ray(t_data *data, int x)
 	ft_direction(data);
 	ft_wallhit(data);
 	ft_raydist(data);
+	
+	// eğer oyuncu zaten kapıdan uzaktaysa direkt kapıyı kapat
+	if (data->ray->perpwalldist >= 1.5 && data->map->map[(int)data->ray->posx][(int)data->ray->posy] != '2')
+		data->is_door_open = 0;
+
 	if (data->ray->wall == 3 && data->ray->perpwalldist < 1.5 && !data->e_pressed)
 	{
 		data->ray->wall = 0;
@@ -112,13 +117,17 @@ void	ft_send_ray(t_data *data, int x)
 		ft_raydist(data);
 	}
 
-	// if (data->e_pressed && data->ray->wall == 2 && data->ray->perpwalldist < 1.5)
-	// {
-	// 	data->ray->wall = 0;
-	// 	ft_wallhit(data);
-	// 	ft_raydist(data);
-	// 	data->is_door_open = 1;
-	// }
+	if (data->e_pressed && data->ray->wall == 2 && data->ray->perpwalldist < 1.5)
+	{
+		data->ray->wall = 0;
+		ft_wallhit(data);
+		ft_raydist(data);
+		data->is_door_open = 1;
+	}
+	
+
+
+	// printf("data->is_door_open: %d\n", data->is_door_open);
 	ft_texture(data, x);
 }
 
