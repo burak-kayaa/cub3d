@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 16:16:01 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/23 00:29:50 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/23 00:54:42 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ int	ft_init_image_array(t_data *data)
 	ft_load_image(data, "textures/sp06.xpm", i++);
 	ft_load_image(data, "textures/sp07.xpm", i++);
 	ft_load_image(data, "textures/sp08.xpm", i++);
+	ft_load_image(data, "textures/hand.xpm", i++);
 
 	return (0);
 	// int		i;

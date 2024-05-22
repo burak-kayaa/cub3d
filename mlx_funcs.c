@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 17:59:24 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/22 21:29:22 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/23 01:11:25 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,28 @@ int	ft_exit(void *param)
 	return (0);
 }
 
+static void ft_render_hand(t_data *data)
+{
+	// xpm file height is 339, width is 185 and put it bottom left corner
+	int	x;
+	int	y;
+	int	color;
+
+	x = 0;
+	while (x < 185)
+	{
+		y = 0;
+		while (y < 339)
+		{
+			color = data->images[13]->addr[y * 185 + x];
+			if ((color & 0x00FFFFFF) != 0)
+				data->mlx_o_data[(y + SCREENHEIGHT - 339) * SCREENWIDTH + (x + (SCREENHEIGHT + 585))] = color;
+			y++;
+		}
+		x++;
+	}
+}
+
 int	key_hook(void *param)
 {
 	t_data	*data;
@@ -32,6 +54,7 @@ int	key_hook(void *param)
 		return (1);
 	ft_ray_casting(data);
 	ft_render_map(data, 0);
+	ft_render_hand(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->mlx_img, 0, 0);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 02:10:46 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/22 21:17:16 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/23 00:52:53 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ int	main(int argc, char **argv)
 		return (printf("Error\n"), 0);
 	data = malloc(sizeof(t_data));
 	data->map_path = argv[1];
-	printf("\a\n");
 	if (ft_init(data))
 		return (printf("Error\n"), 0);
 	if (ft_check_input(data, argv))

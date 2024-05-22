@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 16:07:35 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/23 00:29:56 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/23 00:49:11 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define TILE_SIZE 16
 # define TOTAL_RAYS 1280
 # define PLAYER_SIZE 5
-# define TOTAL_TEXTURES 13
+# define TOTAL_TEXTURES 14
 # define SCREENHEIGHT 512
 # define SCREENWIDTH 1280
 # define MINIMAPWIDTH 7
