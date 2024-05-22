@@ -3,36 +3,47 @@
 /*                                                        :::      ::::::::   */
 /*   init_helper.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 21:46:45 by codespace         #+#    #+#             */
-/*   Updated: 2024/05/21 21:47:23 by codespace        ###   ########.fr       */
+/*   Updated: 2024/05/22 19:56:21 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-char	**ft_create_map(char *file)
+void	ft_get_floor_ceiling(t_data *data)
+{
+	char	*floor;
+	char	*ceiling;
+
+	floor = get_next_line(data->map_fd);
+	ceiling = get_next_line(data->map_fd);
+	data->map->floor = ft_split(floor, ',');
+	data->map->ceiling = ft_split(ceiling, ',');
+	data->map->floor_color = ft_atoi(data->map->floor[0]) * 65536 + \
+		ft_atoi(data->map->floor[1]) * 256 + ft_atoi(data->map->floor[2]);
+	data->map->ceiling_color = ft_atoi(data->map->ceiling[0]) * 65536 + \
+		ft_atoi(data->map->ceiling[1]) * 256 + ft_atoi(data->map->ceiling[2]);
+	free(floor);
+	free(ceiling);
+}
+
+void	ft_create_map(t_data *data)
 {
 	char		*line;
 	char		*tmp;
-	int			fd;
-	char		**map;
 
-	line = ft_strdup("31");
 	tmp = ft_strdup("");
-	fd = open(file, O_RDONLY);
-	if (fd < 0)
-		return (NULL);
+	ft_get_floor_ceiling(data);
 	while (1)
 	{
-		line = get_next_line(fd);
+		line = get_next_line(data->map_fd);
 		if (!line)
 			break ;
 		tmp = ft_strjoin_gnl(tmp, line);
 	}
-	map = ft_split(tmp, '\n');
-	return (map);
+	data->map->map = ft_split(tmp, '\n');
 }
 
 void	ft_free_images(t_data *data, int max)

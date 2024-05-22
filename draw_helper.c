@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_helper.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 15:51:39 by codespace         #+#    #+#             */
-/*   Updated: 2024/05/21 20:16:41 by codespace        ###   ########.fr       */
+/*   Updated: 2024/05/22 20:26:39 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

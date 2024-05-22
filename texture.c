@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 17:59:03 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/22 19:11:31 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/22 20:27:47 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ft_texture_helper(t_data *data)
 	if (data->ray->side == 1 && data->ray->raydiry < 0)
 		data->ray->tex_x = 64 - data->ray->tex_x - 1;
 	data->ray->texstep = 1.0 * 64 / data->ray->lineheight;
-	data->ray->texpos = (data->ray->drawstart - 1080 / 2 + data->ray->lineheight
+	data->ray->texpos = (data->ray->drawstart - SCREENHEIGHT / 2 + data->ray->lineheight
 			/ 2) * data->ray->texstep;
 }
 

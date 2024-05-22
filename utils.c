@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 18:01:03 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/21 22:25:14 by codespace        ###   ########.fr       */
+/*   Updated: 2024/05/22 20:29:41 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,22 @@ void	ft_fill_floor_and_ceiling(t_data *data)
 
 	i = 0;
 	n = 0;
-	while (i < 1080 / 2)
+	while (i < SCREENHEIGHT / 2)
 	{
 		n = 0;
-		while (n < 1920)
+		while (n < SCREENWIDTH)
 		{
-			data->mlx_o_data[i * 1920 + n] = 0x00575757;
+			data->mlx_o_data[i * SCREENWIDTH + n] = data->map->ceiling_color;
 			n++;
 		}
 		i++;
 	}
-	while (i < 1080)
+	while (i < SCREENHEIGHT)
 	{
 		n = 0;
-		while (n < 1920)
+		while (n < SCREENWIDTH)
 		{
-			data->mlx_o_data[i * 1920 + n] = 0x005b95b0;
+			data->mlx_o_data[i * SCREENWIDTH + n] = data->map->floor_color;
 			n++;
 		}
 		i++;

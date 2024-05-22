@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 16:07:35 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/22 19:21:43 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/22 22:53:08 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,13 @@
 # define LEFT_ARROW 123
 # define RIGHT_ARROW 124
 # define TILE_SIZE 16
-# define TOTAL_RAYS 1920
+# define TOTAL_RAYS 1280
 # define PLAYER_SIZE 5
 # define TOTAL_TEXTURES 14
-# define SCREENHEIGHT 1080
-# define SCREENWIDTH 1920
+# define SCREENHEIGHT 512
+# define SCREENWIDTH 1280
+# define MINIMAPWIDTH 7
+# define MINIMAPHEIGHT 7
 
 # include <stdio.h>
 # include <unistd.h>
@@ -43,6 +45,10 @@ typedef struct s_map
 	int		map_x;
 	int		map_y;
 	int		map_s;
+	char	**floor;
+	char	**ceiling;
+	int		floor_color;
+	int		ceiling_color;
 	char	**map;
 }				t_map;
 
@@ -101,6 +107,8 @@ typedef struct s_data
 	void		*win_ptr;
 	void		*mlx_img;
 	int			*mlx_o_data;
+	char		*map_path;
+	int			map_fd;
 	t_bool		w_pressed;
 	t_bool		a_pressed;
 	t_bool		s_pressed;
@@ -125,13 +133,12 @@ void		ft_direction(t_data *data);
 void		ft_check_wallhit(t_data *data);
 void		ft_wallhit(t_data *data);
 void		ft_raydist(t_data *data);
-void		ft_handle_door_interaction(t_data *data);
 void		ft_send_ray(t_data *data, int x);
 void		ft_wall_check(t_data *data);
 void		ft_wall_check1(t_data *data);
 
 /* INIT */
-char		**ft_create_map(char *file);
+void		ft_create_map(t_data *data);
 void		ft_free_images(t_data *data, int max);
 void		ft_init_ray(t_ray *ray);
 int			ft_load_image(t_data *data, char *texture, int index);

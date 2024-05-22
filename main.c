@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 02:10:46 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/21 20:19:20 by codespace        ###   ########.fr       */
+/*   Updated: 2024/05/22 21:17:16 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,11 +97,14 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		return (printf("Error\n"), 0);
 	data = malloc(sizeof(t_data));
+	data->map_path = argv[1];
+	printf("\a\n");
 	if (ft_init(data))
 		return (printf("Error\n"), 0);
 	if (ft_check_input(data, argv))
 		return (printf("Error\n"), 0);
-	data->map->map = ft_create_map(argv[1]);
+	ft_create_map(data);
+	// ft_check_map(data);
 	if (!data->map->map)
 		return (free(data->ray), free(data->map), free(data), 1);
 	ft_get_player_location(data);
