@@ -1,4 +1,4 @@
-SRCS	= main.c init.c mlx_funcs.c utils.c render.c draw.c move.c check.c texture.c #key.c map.c parse.c render.c sprite.c texture.c utils.c
+SRCS	= check.c draw.c draw_helper.c init.c init_helper.c main.c mlx_funcs.c move.c move_helper.c render.c texture.c utils.c wall_check.c
 OBJS	= $(SRCS:.c=.o)
 
 # Path: src/Makefile

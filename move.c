@@ -12,71 +12,6 @@
 
 #include "cub3d.h"
 
-int	is_character(char c, t_data* data)
-{
-	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
-		return (1);
-	if (c == '2' && data->is_door_open)
-		return (1);
-	return (0);
-}
-
-static void	key_w(t_data *data)
-{
-	if (data->map->map[(int)(data->ray->posx + data->ray->dirx
-			* 0.15)][(int)(data->ray->posy)] == '0'
-		|| is_character(data->map->map[(int)(data->ray->posx + data->ray->dirx
-				* 0.15)][(int)(data->ray->posy)], data))
-		data->ray->posx += data->ray->dirx * 0.15;
-	if (data->map->map[(int)data->ray->posx][(int)(data->ray->posy
-		+ data->ray->diry * 0.15)] == '0'
-		|| is_character(data->map->map[(int)data->ray->posx][(int)(data->ray->posy
-				+ data->ray->diry * 0.15)], data))
-		data->ray->posy += data->ray->diry * 0.15;
-}
-
-static void	key_s(t_data *data)
-{
-	if (data->map->map[(int)(data->ray->posx - data->ray->dirx
-			* 0.15)][(int)(data->ray->posy)] == '0'
-		|| is_character(data->map->map[(int)(data->ray->posx - data->ray->dirx
-				* 0.15)][(int)(data->ray->posy)], data))
-		data->ray->posx -= data->ray->dirx * 0.15;
-	if (data->map->map[(int)(data->ray->posx)][(int)(data->ray->posy
-			- data->ray->diry * 0.15)] == '0'
-		|| is_character(data->map->map[(int)(data->ray->posx)][
-			(int)(data->ray->posy - data->ray->diry * 0.15)], data))
-		data->ray->posy -= data->ray->diry * 0.15;
-}
-
-static void	key_d(t_data *data)
-{
-	if (data->map->map[(int)(data->ray->posx + data->ray->diry
-			* 0.15)][(int)(data->ray->posy)] == '0'
-		|| is_character(data->map->map[(int)(data->ray->posx + data->ray->diry
-				* 0.15)][(int)(data->ray->posy)], data))
-		data->ray->posx += data->ray->diry * 0.15;
-	if (data->map->map[(int)(data->ray->posx)][(int)(data->ray->posy
-			- data->ray->dirx * 0.15)] == '0'
-		|| is_character(data->map->map[(int)(data->ray->posx)]
-		[(int)(data->ray->posy - data->ray->dirx * 0.15)], data))
-		data->ray->posy -= data->ray->dirx * 0.15;
-}
-
-static void	key_a(t_data *data)
-{
-	if (data->map->map[(int)(data->ray->posx - data->ray->diry
-			* 0.15)][(int)(data->ray->posy)] == '0'
-		|| is_character(data->map->map[(int)(data->ray->posx - data->ray->diry
-				* 0.15)][(int)(data->ray->posy)], data))
-		data->ray->posx -= data->ray->diry * 0.15;
-	if (data->map->map[(int)(data->ray->posx)][(int)(data->ray->posy
-			+ data->ray->dirx * 0.15)] == '0'
-		|| is_character(data->map->map[(int)(data->ray->posx)]
-		[(int)(data->ray->posy + data->ray->dirx * 0.15)], data))
-		data->ray->posy += data->ray->dirx * 0.15;
-}
-
 void	key_left(t_data *data)
 {
 	double	old_dirx;
@@ -125,6 +60,14 @@ void	ft_move(t_data *data)
 		key_a(data);
 	if (data->d_pressed)
 		key_d(data);
+}
+
+int	ft_player_move(t_data *data)
+{
+	ft_move(data);
+	ft_draw_square_on_coords(data, data->ray->posy * TILE_SIZE,
+		data->ray->posx * TILE_SIZE, 0x00000000);
+	return (0);
 }
 
 void	ft_draw_square_on_coords(t_data *data, int x, int y, int color)

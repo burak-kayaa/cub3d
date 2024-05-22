@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egumus <egumus@student.42istanbul.com.t    +#+  +:+       +#+        */
+/*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 16:07:35 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/22 01:32:34 by egumus           ###   ########.fr       */
+/*   Updated: 2024/05/22 19:21:43 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,13 @@
 # include "mlx/mlx.h"
 # include "libft/libft.h"
 
-typedef int t_bool;
+typedef int	t_bool;
 
 typedef struct s_map
 {
-	int		mapX;
-	int		mapY;
-	int		mapS;
+	int		map_x;
+	int		map_y;
+	int		map_s;
 	char	**map;
 }				t_map;
 
@@ -63,8 +63,8 @@ typedef struct s_ray
 	double		raydiry;
 	double		deltadistx;
 	double		deltadisty;
-	int			mapx;
-	int			mapy;
+	int			map_x;
+	int			map_y;
 	int			stepx;
 	int			stepy;
 	double		sidedistx;
@@ -112,29 +112,70 @@ typedef struct s_data
 	t_map		*map;
 	t_ray		*ray;
 	t_images	**images;
-}t_data;
+}				t_data;
 
-int	ft_init(t_data *data);
+/* CHECK */
+int			check_extension(char *file);
+int			ft_check_input(t_data *data, char **argv);
 
-/* PARSE */
-int	ft_check_input(t_data *data, char **argv);
-char	**ft_create_map(char *file);
+/* DRAW */
+void		ft_ray_casting(t_data *data);
+void		ft_log_ray(t_data *data, int x);
+void		ft_direction(t_data *data);
+void		ft_check_wallhit(t_data *data);
+void		ft_wallhit(t_data *data);
+void		ft_raydist(t_data *data);
+void		ft_handle_door_interaction(t_data *data);
+void		ft_send_ray(t_data *data, int x);
+void		ft_wall_check(t_data *data);
+void		ft_wall_check1(t_data *data);
+
+/* INIT */
+char		**ft_create_map(char *file);
+void		ft_free_images(t_data *data, int max);
+void		ft_init_ray(t_ray *ray);
+int			ft_load_image(t_data *data, char *texture, int index);
+int			ft_init_image_array(t_data *data);
+int			ft_create_main_image(t_data *data);
+int			ft_init_images(t_data *data);
+int			ft_init(t_data *data);
 
 /* MLX */
-int	ft_exit(void *param);
-int	key_hook(void *param);
-int	key_pressed(int keycode, void *param);
-int	key_released(int keycode, void *param);
+int			ft_exit(void *param);
+int			key_hook(void *param);
+int			key_pressed(int keycode, void *param);
+int			key_released(int keycode, void *param);
+void		ft_draw_square_on_coords(t_data *data, int x, int y, int color);
 
-/* UTILS */
-void	store_ray(t_data *data, int x, int y, int x2, int y2, int i);
-void	ft_fill_floor_and_ceiling(t_data *data);
-double	ft_ray_length(float x1, float y1, float x2, float y2);
+/* MOVE */
+int			is_character(char c, t_data *data);
+void		key_w(t_data *data);
+void		key_s(t_data *data);
+void		key_d(t_data *data);
+void		key_a(t_data *data);
+void		key_left(t_data *data);
+void		key_right(t_data *data);
+void		ft_move(t_data *data);
+int			ft_player_move(t_data *data);
 
 /* RENDER */
-void	ft_render_map(t_data *data, int render_fc);
-void	ft_move(t_data *data);
-void	ft_draw_square_on_coords(t_data *data, int x, int y, int color);
-void	ft_ray_casting(t_data *data);
-void	ft_texture(t_data *data, int x);
+void		ft_fill_pixel(t_data *data, int x, int y, char type);
+void		ft_render_map(t_data *data, int render_fc);
+
+/* TEXTURE */
+
+void		ft_texture_helper(t_data *data);
+void		ft_draw_wall_texture(t_data *data, int x, int tex_index);
+void		ft_draw_wall_side(t_data *data, int x);
+void		ft_texture(t_data *data, int x);
+
+/* UTILS */
+void		ft_fill_floor_and_ceiling(t_data *data);
+
+/* MAIN */
+void		ft_set_direction(t_data *data, char c);
+void		ft_set_plane(t_data *data, char c);
+void		ft_get_direction(t_data *data, char c);
+void		ft_get_player_location(t_data *data);
+
 #endif
