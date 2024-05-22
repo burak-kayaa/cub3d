@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
+/*   By: egumus <egumus@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 16:07:35 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/20 19:14:04 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/22 01:32:34 by egumus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,8 +133,8 @@ double	ft_ray_length(float x1, float y1, float x2, float y2);
 
 /* RENDER */
 void	ft_render_map(t_data *data, int render_fc);
-int ft_player_move(t_data *data);
-void ft_draw_square_on_coords(t_data *data, int x, int y, int color);
+void	ft_move(t_data *data);
+void	ft_draw_square_on_coords(t_data *data, int x, int y, int color);
 void	ft_ray_casting(t_data *data);
 void	ft_texture(t_data *data, int x);
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_funcs.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
+/*   By: egumus <egumus@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 17:59:24 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/20 19:08:53 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/22 01:35:05 by egumus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,14 @@ int	ft_exit(void *param)
 	return (0);
 }
 
-
 int	key_hook(void *param)
 {
 	t_data	*data;
 	data = (t_data *)param;
 	ft_render_map(data, 1);
-	if (ft_player_move(data))
-		return (1);
+	ft_move(data);
 	ft_ray_casting(data);
 	ft_render_map(data, 0);
-	ft_draw_square_on_coords(data, data->ray->posy * TILE_SIZE, data->ray->posx * TILE_SIZE, 0x0000FF00);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->mlx_img, 0, 0);
 	return (0);
 }

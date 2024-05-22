@@ -1,5 +1,13 @@
 {
 	"files.associations": {
-		"cub3d.h": "c"
-	}
+		"cub3d.h": "c",
+		"array": "c",
+		"iterator": "c",
+		"string": "c",
+		"string_view": "c",
+		"vector": "c"
+	},
+	"files.exclude": {
+        "**/**.o": true,
+    }
 }

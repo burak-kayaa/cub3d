@@ -16,7 +16,6 @@ int	is_character(char c, t_data* data)
 {
 	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
 		return (1);
-	printf("data->is_door_open: %d\n", data->is_door_open);
 	if (c == '2' && data->is_door_open)
 		return (1);
 	return (0);
@@ -126,14 +125,6 @@ void	ft_move(t_data *data)
 		key_a(data);
 	if (data->d_pressed)
 		key_d(data);
-}
-
-int	ft_player_move(t_data *data)
-{
-	ft_move(data);
-	ft_draw_square_on_coords(data, data->ray->posy * TILE_SIZE,
-		data->ray->posx * TILE_SIZE, 0x00000000);
-	return (0);
 }
 
 void	ft_draw_square_on_coords(t_data *data, int x, int y, int color)
