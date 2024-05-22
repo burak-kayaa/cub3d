@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 17:59:03 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/22 20:27:47 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/23 00:30:32 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,36 +42,42 @@ void	ft_draw_wall_texture(t_data *data, int x, int tex_index)
 	{
 		texy = (int)data->ray->texpos & 63;
 		data->ray->texpos += data->ray->texstep;
-		if (i == 0)
-			i++;
-		if (i % 15 == 0)
-			i = 1;
-		if (texy >= 62)
-			texy = 61;
-		data->mlx_o_data[data->ray->drawstart * SCREENWIDTH + x]
-			= data->images[tex_index]->addr[64 * texy + data->ray->tex_x];
+		if (data->images[tex_index]->addr[64 * texy + data->ray->tex_x] > 0)
+			data->mlx_o_data[data->ray->drawstart * SCREENWIDTH + x]
+				= data->images[tex_index]->addr[64 * texy + data->ray->tex_x];
 		data->ray->drawstart++;
 		i++;
 	}
 }
 
-void	ft_draw_wall_side(t_data *data, int x)
+void	ft_draw_wall_side(t_data *data, int x, int f_flag)
 {
-	if (data->ray->side == 0 && data->ray->raydirx > 0)
-		ft_draw_wall_texture(data, x, 1);
-	else if (data->ray->side == 0 && data->ray->raydirx < 0)
-		ft_draw_wall_texture(data, x, 2);
-	else if (data->ray->side == 1 && data->ray->raydiry > 0)
-		ft_draw_wall_texture(data, x, 3);
+	if (f_flag)
+	{
+		if (data->ray->side == 0 && data->ray->raydirx < 0)
+			ft_draw_wall_texture(data, x, f_flag);
+	}
 	else
-		ft_draw_wall_texture(data, x, 4);
+	{
+		if (data->ray->side == 0 && data->ray->raydirx > 0)
+			ft_draw_wall_texture(data, x, 1);
+		else if (data->ray->side == 0 && data->ray->raydirx < 0)
+			ft_draw_wall_texture(data, x, 2);
+		else if (data->ray->side == 1 && data->ray->raydiry > 0)
+			ft_draw_wall_texture(data, x, 3);
+		else
+			ft_draw_wall_texture(data, x, 4);
+	}
 }
 
-void	ft_texture(t_data *data, int x)
+void	ft_texture(t_data *data, int x, int f_flag)
 {
 	ft_texture_helper(data);
-	if (data->ray->wall == 1)
-		ft_draw_wall_side(data, x);
+	if (data->ray->wall == 1 || f_flag)
+		ft_draw_wall_side(data, x, f_flag);
 	else if (data->ray->wall == 2)
 		ft_draw_wall_texture(data, x, 5);
+	else if (data->ray->wall == 4)
+		ft_draw_wall_texture(data, x, 7);
 }
+

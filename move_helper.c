@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 16:41:50 by codespace         #+#    #+#             */
-/*   Updated: 2024/05/22 19:18:25 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/23 00:16:51 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	is_character(char c, t_data *data)
 {
-	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
+	if (c == 'N' || c == 'S' || c == 'E' || c == 'W' || c == 'U')
 		return (1);
 	if (c == '2' && data->is_door_open)
 		return (1);

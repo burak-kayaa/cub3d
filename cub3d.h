@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 16:07:35 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/22 22:53:08 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/23 00:29:56 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define TILE_SIZE 16
 # define TOTAL_RAYS 1280
 # define PLAYER_SIZE 5
-# define TOTAL_TEXTURES 14
+# define TOTAL_TEXTURES 13
 # define SCREENHEIGHT 512
 # define SCREENWIDTH 1280
 # define MINIMAPWIDTH 7
@@ -136,12 +136,13 @@ void		ft_raydist(t_data *data);
 void		ft_send_ray(t_data *data, int x);
 void		ft_wall_check(t_data *data);
 void		ft_wall_check1(t_data *data);
+void		ft_send_ray_for_sp(t_data *data, int x, int i);
 
 /* INIT */
 void		ft_create_map(t_data *data);
 void		ft_free_images(t_data *data, int max);
 void		ft_init_ray(t_ray *ray);
-int			ft_load_image(t_data *data, char *texture, int index);
+void		ft_load_image(t_data *data, char *texture, int index);
 int			ft_init_image_array(t_data *data);
 int			ft_create_main_image(t_data *data);
 int			ft_init_images(t_data *data);
@@ -173,8 +174,8 @@ void		ft_render_map(t_data *data, int render_fc);
 
 void		ft_texture_helper(t_data *data);
 void		ft_draw_wall_texture(t_data *data, int x, int tex_index);
-void		ft_draw_wall_side(t_data *data, int x);
-void		ft_texture(t_data *data, int x);
+void		ft_draw_wall_side(t_data *data, int x, int f_flag);
+void		ft_texture(t_data *data, int x, int f_flag);
 
 /* UTILS */
 void		ft_fill_floor_and_ceiling(t_data *data);

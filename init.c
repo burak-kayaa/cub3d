@@ -6,13 +6,13 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 16:16:01 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/22 22:30:03 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/23 00:29:50 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	ft_load_image(t_data *data, char *texture, int index)
+int	ft_load_walls(t_data *data, char *texture, int index)
 {
 	data->images[index] = malloc(sizeof(t_images));
 	if (!data->images[index])
@@ -23,22 +23,23 @@ int	ft_load_image(t_data *data, char *texture, int index)
 	(int *)mlx_get_data_addr(data->images[index]->img, \
 	&data->images[index]->bits_per_pixel, &data->images[index]->line_length, \
 	&data->images[index]->endian);
-	if (index == 4)
-	{
-		data->images[index + 1] = malloc(sizeof(t_images));
-		if (!data->images[index + 1])
-		{
-			ft_free_images(data, index + 1);
-			return (1);
-		}
-		data->images[index + 1]->img = mlx_xpm_file_to_image(data->mlx_ptr, \
-		"textures/fatih_kapi.xpm", &data->images[index + 1]->width, &data->images[index + 1]->height);
-		data->images[index + 1]->addr = \
-		(int *)mlx_get_data_addr(data->images[index + 1]->img, \
-		&data->images[index + 1]->bits_per_pixel, &data->images[index + 1]->line_length, \
-		&data->images[index + 1]->endian);
-	}
 	return (0);
+}
+
+void ft_load_image(t_data *data, char *texture, int index)
+{
+	data->images[index] = malloc(sizeof(t_images));
+	if (!data->images[index])
+	{
+		ft_free_images(data, index);
+		return ;
+	}
+	data->images[index]->img = mlx_xpm_file_to_image(data->mlx_ptr, \
+	texture, &data->images[index]->width, &data->images[index]->height);
+	data->images[index]->addr = \
+	(int *)mlx_get_data_addr(data->images[index]->img, \
+	&data->images[index]->bits_per_pixel, &data->images[index]->line_length, \
+	&data->images[index]->endian);
 }
 
 int	ft_init_image_array(t_data *data)
@@ -64,13 +65,21 @@ int	ft_init_image_array(t_data *data)
 		texture[ft_strlen(texture) - 1] = '\0';
 		texture = ft_strtrim(texture, " ");
 		free(line);
-		if (ft_load_image(data, texture, i))
+		if (ft_load_walls(data, texture, i))
 		{
 			ft_free_images(data, i);
 			return (1);
 		}
 		i++;
 	}
+	ft_load_image(data, "textures/fatih_kapi.xpm", i++);
+	ft_load_image(data, "textures/sp01.xpm", i++);
+	ft_load_image(data, "textures/sp02.xpm", i++);
+	ft_load_image(data, "textures/sp04.xpm", i++);
+	ft_load_image(data, "textures/sp05.xpm", i++);
+	ft_load_image(data, "textures/sp06.xpm", i++);
+	ft_load_image(data, "textures/sp07.xpm", i++);
+	ft_load_image(data, "textures/sp08.xpm", i++);
 
 	return (0);
 	// int		i;
