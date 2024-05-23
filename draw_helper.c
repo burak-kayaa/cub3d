@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/21 15:51:39 by codespace         #+#    #+#             */
-/*   Updated: 2024/05/23 09:13:49 by burkaya          ###   ########.fr       */
+/*   Created: 2024/05/23 12:20:49 by burkaya           #+#    #+#             */
+/*   Updated: 2024/05/23 12:20:52 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,6 @@ void	ft_ray_casting(t_data *data)
 	x = 0;
 	ft_ray_casting_for_sp(data, x, i);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->mlx_img, 0, 0);
-}
-
-void	ft_log_ray(t_data *data, int x)
-{
-	data->ray->log[x][0] = data->ray->map_x;
-	data->ray->log[x][1] = data->ray->map_y;
-	data->ray->log[x][2] = data->ray->map_x + data->ray->raydirx * 100;
-	data->ray->log[x][3] = data->ray->map_y + data->ray->raydiry * 100;
 }
 
 void	ft_direction(t_data *data)

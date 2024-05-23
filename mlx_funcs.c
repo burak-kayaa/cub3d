@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 17:59:24 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/23 09:12:34 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/23 12:45:19 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	ft_exit(void *param)
 
 	data = (t_data *)param;
 	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+	system("killall afplay");
 	exit(0);
 	return (0);
 }
@@ -88,6 +89,8 @@ int	key_released(int keycode, void *param)
 	t_data	*data;
 
 	data = (t_data *)param;
+	// system("say -v Yelda \"sademir\" &");
+	
 	if (keycode == W_KEY)
 		data->w_pressed = 0;
 	if (keycode == A_KEY)

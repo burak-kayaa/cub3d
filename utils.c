@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 18:01:03 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/22 20:29:41 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/23 13:40:33 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,14 @@ void	ft_fill_floor_and_ceiling(t_data *data)
 		}
 		i++;
 	}
+}
+
+int	ft_tab_len(char **tab)
+{
+	int	i;
+
+	i = 0;
+	while (tab[i])
+		i++;
+	return (i);
 }

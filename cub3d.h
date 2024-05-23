@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 16:07:35 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/23 09:19:01 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/23 13:40:54 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,10 +127,10 @@ typedef struct s_data
 /* CHECK */
 int			check_extension(char *file);
 int			ft_check_input(t_data *data, char **argv);
+void		ft_check_map(t_data *data);
 
 /* DRAW */
 void		ft_ray_casting(t_data *data);
-void		ft_log_ray(t_data *data, int x);
 void		ft_direction(t_data *data);
 void		ft_check_wallhit(t_data *data);
 void		ft_wallhit(t_data *data);
@@ -184,6 +184,7 @@ void		ft_texture(t_data *data, int x, int f_flag);
 
 /* UTILS */
 void		ft_fill_floor_and_ceiling(t_data *data);
+int			ft_tab_len(char **tab);
 
 /* MAIN */
 void		ft_set_direction(t_data *data, char c);

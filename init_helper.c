@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 21:46:45 by codespace         #+#    #+#             */
-/*   Updated: 2024/05/22 19:56:21 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/23 14:29:05 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void	ft_create_map(t_data *data)
 		tmp = ft_strjoin_gnl(tmp, line);
 	}
 	data->map->map = ft_split(tmp, '\n');
+	data->map->map_x = ft_strlen(data->map->map[0]);
+	data->map->map_y = ft_tab_len(data->map->map);
 }
 
 void	ft_free_images(t_data *data, int max)

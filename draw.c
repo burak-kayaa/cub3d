@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 02:08:21 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/23 09:17:01 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/23 12:18:49 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,7 @@ void	ft_raydist(t_data *data)
 	else
 		data->ray->perpwalldist = data->ray->sidedisty - data->ray->deltadisty;
 	if (data->ray->perpwalldist < 0.001)
-	{
 		data->ray->perpwalldist += 0.001;
-	}
 	data->ray->lineheight = (int)(SCREENHEIGHT / data->ray->perpwalldist * 2);
 	data->ray->drawstart = -data->ray->lineheight / 2 + SCREENHEIGHT / 2;
 	if (data->ray->drawstart < 0)
