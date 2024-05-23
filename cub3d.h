@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 16:07:35 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/23 13:40:54 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/23 19:30:31 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,11 @@ typedef struct s_map
 	int		floor_color;
 	int		ceiling_color;
 	char	**map;
+	char	**flood_fill;
+	char	**wall_textures;
+	char 	*floor_str;
+	char 	*ceiling_str;
+	char	*map_str;
 }				t_map;
 
 typedef struct s_ray
@@ -87,7 +92,6 @@ typedef struct s_ray
 	double		texpos;
 	int			key_a;
 	int			key_d;
-	int			**log;
 	int			user_x;
 	int			user_y;
 }	t_ray;
@@ -185,6 +189,7 @@ void		ft_texture(t_data *data, int x, int f_flag);
 /* UTILS */
 void		ft_fill_floor_and_ceiling(t_data *data);
 int			ft_tab_len(char **tab);
+char		**ft_split_new_lines(char const *s);
 
 /* MAIN */
 void		ft_set_direction(t_data *data, char c);

@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 02:10:46 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/23 13:41:55 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/23 21:47:53 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,10 @@ void	ft_get_player_location(t_data *data)
 			if (data->map->map[i][j] == 'N' || data->map->map[i][j] == 'S'
 				|| data->map->map[i][j] == 'W' || data->map->map[i][j] == 'E')
 			{
-				data->ray->posx = j + 0.5;
-				data->ray->posy = i + 0.5;
+				data->ray->posx = i + 0.5;
+				data->ray->posy = j + 0.5;
 				ft_get_direction(data, data->map->map[i][j]);
+				return ;
 			}
 			j++;
 		}
@@ -105,10 +106,12 @@ int	main(int argc, char **argv)
 	ft_create_map(data);
 	if (!data->map->map)
 		return (free(data->ray), free(data->map), free(data), 1);
-	// system("afplay ./regular_show.mpeg &");
-	ft_check_map(data);
 	ft_get_player_location(data);
+	system("afplay ./regular_show.mpeg &");
+	ft_check_map(data);
 	mlx_mouse_move(data->win_ptr, SCREENWIDTH / 2, SCREENHEIGHT / 2);
+	printf("data->ray->posx: %f\n", data->ray->posx);
+	printf("data->ray->posy: %f\n", data->ray->posy);
 	mlx_loop_hook(data->mlx_ptr, key_hook, data);
 	mlx_hook(data->win_ptr, 3, 0, key_released, data);
 	mlx_hook(data->win_ptr, 2, 0, key_pressed, data);

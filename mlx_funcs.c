@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 17:59:24 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/23 12:45:19 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/23 19:49:11 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ int	key_released(int keycode, void *param)
 
 	data = (t_data *)param;
 	// system("say -v Yelda \"sademir\" &");
-	
 	if (keycode == W_KEY)
 		data->w_pressed = 0;
 	if (keycode == A_KEY)

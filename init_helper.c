@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 21:46:45 by codespace         #+#    #+#             */
-/*   Updated: 2024/05/23 14:29:05 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/23 19:57:25 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,39 +14,64 @@
 
 void	ft_get_floor_ceiling(t_data *data)
 {
-	char	*floor;
-	char	*ceiling;
-
-	floor = get_next_line(data->map_fd);
-	ceiling = get_next_line(data->map_fd);
-	data->map->floor = ft_split(floor, ',');
-	data->map->ceiling = ft_split(ceiling, ',');
+	data->map->floor = ft_split(data->map->floor_str + 2, ',');
+	data->map->ceiling = ft_split(data->map->ceiling_str + 2, ',');
 	data->map->floor_color = ft_atoi(data->map->floor[0]) * 65536 + \
 		ft_atoi(data->map->floor[1]) * 256 + ft_atoi(data->map->floor[2]);
 	data->map->ceiling_color = ft_atoi(data->map->ceiling[0]) * 65536 + \
 		ft_atoi(data->map->ceiling[1]) * 256 + ft_atoi(data->map->ceiling[2]);
-	free(floor);
-	free(ceiling);
+}
+
+static int ft_is_multiple_map(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i] && str[i + 1])
+	{
+		if (str[i] == '\n' && str[i + 1] == '\n')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+static int ft_get_longest_index(char **map)
+{
+	int i;
+	int j;
+	int max;
+
+	i = 0;
+	max = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+			j++;
+		if (j > max)
+			max = j;
+		i++;
+	}
+	return (max);
 }
 
 void	ft_create_map(t_data *data)
 {
-	char		*line;
 	char		*tmp;
 
 	tmp = ft_strdup("");
-	ft_get_floor_ceiling(data);
-	while (1)
+	if (ft_is_multiple_map(data->map->map_str))
 	{
-		line = get_next_line(data->map_fd);
-		if (!line)
-			break ;
-		tmp = ft_strjoin_gnl(tmp, line);
+		printf("Error\nMultiple maps detected\n");
+		exit(1);
 	}
-	data->map->map = ft_split(tmp, '\n');
-	data->map->map_x = ft_strlen(data->map->map[0]);
+	data->map->map = ft_split(data->map->map_str, '\n');
+	data->map->flood_fill = ft_split(data->map->map_str, '\n');
+	data->map->map_x = ft_get_longest_index(data->map->map);
 	data->map->map_y = ft_tab_len(data->map->map);
 }
+
 
 void	ft_free_images(t_data *data, int max)
 {
@@ -77,5 +102,4 @@ void	ft_init_ray(t_ray *ray)
 	ray->wall = 0;
 	ray->raydirx = 0;
 	ray->raydiry = 0;
-	ray->log = malloc(sizeof(int *) * TOTAL_RAYS);
 }

@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 02:08:21 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/23 12:18:49 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/23 21:28:01 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	ft_check_wallhit(t_data *data)
 {
+	// printf("data->ray->map_x: %d\n", data->ray->map_x);
+	// printf("data->ray->map_y: %d\n", data->ray->map_y);
 	if (data->map->map[data->ray->map_x][data->ray->map_y] == '1' ||
 		data->map->map[data->ray->map_x][data->ray->map_y] == '2')
 	{

@@ -1,4 +1,4 @@
-SRCS	= check.c draw.c draw_helper.c init.c init_helper.c main.c mlx_funcs.c move.c move_helper.c render.c texture.c utils.c wall_check.c draw_sp.c load.c check_map.c
+SRCS	= check.c draw.c draw_helper.c init.c init_helper.c ft_split_new_lines.c main.c mlx_funcs.c move.c move_helper.c render.c texture.c utils.c wall_check.c draw_sp.c load.c check_map.c
 OBJS	= $(SRCS:.c=.o)
 
 # Path: src/Makefile
@@ -30,5 +30,8 @@ fclean: clean
 	make fclean -C ./libft
 
 re: fclean all
+
+shutup:
+	killall afplay 2> /dev/null || true
 
 .PHONY: all clean fclean re
