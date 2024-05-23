@@ -6,41 +6,11 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 16:16:01 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/23 00:54:42 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/23 09:18:31 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-int	ft_load_walls(t_data *data, char *texture, int index)
-{
-	data->images[index] = malloc(sizeof(t_images));
-	if (!data->images[index])
-		return (1);
-	data->images[index]->img = mlx_xpm_file_to_image(data->mlx_ptr, \
-		texture, &data->images[index]->width, &data->images[index]->height);
-	data->images[index]->addr = \
-	(int *)mlx_get_data_addr(data->images[index]->img, \
-	&data->images[index]->bits_per_pixel, &data->images[index]->line_length, \
-	&data->images[index]->endian);
-	return (0);
-}
-
-void ft_load_image(t_data *data, char *texture, int index)
-{
-	data->images[index] = malloc(sizeof(t_images));
-	if (!data->images[index])
-	{
-		ft_free_images(data, index);
-		return ;
-	}
-	data->images[index]->img = mlx_xpm_file_to_image(data->mlx_ptr, \
-	texture, &data->images[index]->width, &data->images[index]->height);
-	data->images[index]->addr = \
-	(int *)mlx_get_data_addr(data->images[index]->img, \
-	&data->images[index]->bits_per_pixel, &data->images[index]->line_length, \
-	&data->images[index]->endian);
-}
 
 int	ft_init_image_array(t_data *data)
 {
@@ -54,9 +24,9 @@ int	ft_init_image_array(t_data *data)
 	data->images = malloc(sizeof(t_images *) * (TOTAL_TEXTURES + 1));
 	if (!data->images)
 		return (1);
-	i = 1;
+	i = 0;
 	data->images[TOTAL_TEXTURES] = NULL;
-	while (i < 5)
+	while (++i < 5)
 	{
 		line = get_next_line(data->map_fd);
 		if (!line)
@@ -66,46 +36,9 @@ int	ft_init_image_array(t_data *data)
 		texture = ft_strtrim(texture, " ");
 		free(line);
 		if (ft_load_walls(data, texture, i))
-		{
-			ft_free_images(data, i);
-			return (1);
-		}
-		i++;
+			return (ft_free_images(data, i), 1);
 	}
-	ft_load_image(data, "textures/fatih_kapi.xpm", i++);
-	ft_load_image(data, "textures/sp01.xpm", i++);
-	ft_load_image(data, "textures/sp02.xpm", i++);
-	ft_load_image(data, "textures/sp04.xpm", i++);
-	ft_load_image(data, "textures/sp05.xpm", i++);
-	ft_load_image(data, "textures/sp06.xpm", i++);
-	ft_load_image(data, "textures/sp07.xpm", i++);
-	ft_load_image(data, "textures/sp08.xpm", i++);
-	ft_load_image(data, "textures/hand.xpm", i++);
-
-	return (0);
-	// int		i;
-	// char	*textures[15] = {"", "textures/text1.xpm", "textures/text2.xpm", \
-	// "textures/text3.xpm", "textures/text4.xpm", "textures/fatih_kapi.xpm", \
-	// "textures/anime2.xpm", "textures/anime3.xpm", \
-	// "textures/anime4.xpm", "textures/anime5.xpm", "textures/anime6.xpm", \
-	// "textures/anime7.xpm", "textures/anime8.xpm", "textures/anime9.xpm", \
-	// "textures/anime10.xpm"};
-
-	// data->images = malloc(sizeof(t_images *) * (TOTAL_TEXTURES + 1));
-	// if (!data->images)
-	// 	return (1);
-	// data->images[TOTAL_TEXTURES] = NULL;
-	// i = 1;
-	// while (i < TOTAL_TEXTURES + 1)
-	// {
-	// 	if (ft_load_image(data, textures[i], i))
-	// 	{
-	// 		ft_free_images(data, i);
-	// 		return (1);
-	// 	}
-	// 	i++;
-	// }
-	return (0);
+	return (ft_load_other_images(data, i), 0);
 }
 
 int	ft_create_main_image(t_data *data)
@@ -136,7 +69,8 @@ int	ft_init_images(t_data *data)
 int	ft_init(t_data *data)
 {
 	data->mlx_ptr = mlx_init();
-	data->win_ptr = mlx_new_window(data->mlx_ptr, SCREENWIDTH, SCREENHEIGHT, "mlx 42");
+	data->win_ptr = mlx_new_window(data->mlx_ptr, \
+		SCREENWIDTH, SCREENHEIGHT, "mlx 42");
 	data->w_pressed = 0;
 	data->a_pressed = 0;
 	data->s_pressed = 0;

@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 16:07:35 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/23 00:49:11 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/23 09:19:01 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ typedef struct s_ray
 	int			key_a;
 	int			key_d;
 	int			**log;
+	int			user_x;
+	int			user_y;
 }	t_ray;
 
 typedef struct s_images
@@ -147,6 +149,9 @@ int			ft_init_image_array(t_data *data);
 int			ft_create_main_image(t_data *data);
 int			ft_init_images(t_data *data);
 int			ft_init(t_data *data);
+void		ft_load_other_images(t_data *data, int i);
+void		ft_load_image(t_data *data, char *texture, int index);
+int			ft_load_walls(t_data *data, char *texture, int index);
 
 /* MLX */
 int			ft_exit(void *param);

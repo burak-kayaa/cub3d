@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 17:59:03 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/23 00:30:32 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/23 09:02:38 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ void	ft_texture_helper(t_data *data)
 	if (data->ray->side == 1 && data->ray->raydiry < 0)
 		data->ray->tex_x = 64 - data->ray->tex_x - 1;
 	data->ray->texstep = 1.0 * 64 / data->ray->lineheight;
-	data->ray->texpos = (data->ray->drawstart - SCREENHEIGHT / 2 + data->ray->lineheight
-			/ 2) * data->ray->texstep;
+	data->ray->texpos = (data->ray->drawstart - SCREENHEIGHT
+			/ 2 + data->ray->lineheight / 2) * data->ray->texstep;
 }
 
 void	ft_draw_wall_texture(t_data *data, int x, int tex_index)
@@ -80,4 +80,3 @@ void	ft_texture(t_data *data, int x, int f_flag)
 	else if (data->ray->wall == 4)
 		ft_draw_wall_texture(data, x, 7);
 }
-

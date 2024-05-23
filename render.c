@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 18:01:58 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/22 22:57:44 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/23 09:11:34 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,34 +39,43 @@ void	ft_fill_pixel(t_data *data, int x, int y, char type)
 	}
 }
 
+void	ft_render_map_helper(t_data *data, int i, int j)
+{
+	if (data->ray->user_x - (MINIMAPHEIGHT / 2) + j < 0
+		|| data->ray->user_y - (MINIMAPHEIGHT / 2) + i < 0
+		|| data->ray->user_x - (MINIMAPHEIGHT / 2) + j >= data->map->map_x
+		|| data->ray->user_y - (MINIMAPHEIGHT / 2) + i >= data->map->map_y)
+		ft_fill_pixel(data, j * TILE_SIZE, i * TILE_SIZE, '*');
+	else if (data->map->map[data->ray->user_y - (MINIMAPHEIGHT / 2) + i]
+		[data->ray->user_x - (MINIMAPHEIGHT / 2) + j] == '1')
+		ft_fill_pixel(data, j * TILE_SIZE, i * TILE_SIZE, '1');
+	else if (data->map->map[data->ray->user_y - (MINIMAPHEIGHT / 2) + i]
+		[data->ray->user_x - (MINIMAPHEIGHT / 2) + j] == '2')
+		ft_fill_pixel(data, j * TILE_SIZE, i * TILE_SIZE, '2');
+	else
+		ft_fill_pixel(data, j * TILE_SIZE, i * TILE_SIZE, '0');
+}
+
 void	ft_render_map(t_data *data, int render_fc)
 {
-    int	i;
-    int	j;
-	int	user_x;
-	int	user_y;
+	int	i;
+	int	j;
 
 	i = 0;
 	if (render_fc)
 		ft_fill_floor_and_ceiling(data);
-	user_x = (int)data->ray->posy;
-	user_y = (int)data->ray->posx;
+	data->ray->user_x = (int)data->ray->posy;
+	data->ray->user_y = (int)data->ray->posx;
 	while (i < MINIMAPHEIGHT)
 	{
 		j = 0;
 		while (j < MINIMAPWIDTH)
 		{
-			if (user_x - (MINIMAPHEIGHT / 2) + j < 0 || user_y - (MINIMAPHEIGHT / 2) + i < 0 || user_x - (MINIMAPHEIGHT / 2) + j >= data->map->map_x || user_y - (MINIMAPHEIGHT / 2) + i >= data->map->map_y)
-				ft_fill_pixel(data, j * TILE_SIZE, i * TILE_SIZE, '*');
-			else if (data->map->map[user_y - (MINIMAPHEIGHT / 2) + i][user_x - (MINIMAPHEIGHT / 2) + j] == '1')
-				ft_fill_pixel(data, j * TILE_SIZE, i * TILE_SIZE, '1');
-			else if (data->map->map[user_y - (MINIMAPHEIGHT / 2) + i][user_x - (MINIMAPHEIGHT / 2) + j] == '2')
-				ft_fill_pixel(data, j * TILE_SIZE, i * TILE_SIZE, '2');
-			else
-				ft_fill_pixel(data, j * TILE_SIZE, i * TILE_SIZE, '0');
+			ft_render_map_helper(data, i, j);
 			j++;
 		}
 		i++;
 	}
-	ft_fill_pixel(data, (MINIMAPWIDTH / 2) * TILE_SIZE, (MINIMAPHEIGHT / 2) * TILE_SIZE, 'P');
+	ft_fill_pixel(data, (MINIMAPWIDTH / 2) * TILE_SIZE, \
+		(MINIMAPHEIGHT / 2) * TILE_SIZE, 'P');
 }
