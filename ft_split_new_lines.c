@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:56:44 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/24 16:57:54 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/24 18:55:43 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	**ft_split_new_lines(char const *str)
 	while (s[i] == '\n')
 		i++;
 	s += i;
-	s = ft_strdup(s);
+	// s = ft_strdup(s);
 	len = ft_countwords(s);
 	if (len < 3)
 		return (ft_error("Error\n", NULL), NULL);
