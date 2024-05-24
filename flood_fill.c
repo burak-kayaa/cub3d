@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:51:00 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/24 17:48:22 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/24 23:47:14 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	check_flood(t_data *data)
 	}
 }
 
-void	flood_fill(t_data *data, int y, int x)
+void	flood_fill(t_data *data, int x, int y)
 {
 	if (y < 0 || x < 0 || y >= data->map->map_y \
 	|| x >= (int)ft_strlen(data->map->map[y]) \
@@ -46,9 +46,9 @@ void	flood_fill(t_data *data, int y, int x)
 	|| data->map->flood_fill[y][x] == 'E' || data->map->flood_fill[y][x] == '1')
 	{
 		data->map->flood_fill[y][x] = 'F';
-		flood_fill(data, y + 1, x);
-		flood_fill(data, y - 1, x);
-		flood_fill(data, y, x + 1);
-		flood_fill(data, y, x - 1);
+		flood_fill(data, x + 1, y);
+		flood_fill(data, x - 1, y);
+		flood_fill(data, x, y + 1);
+		flood_fill(data, x, y - 1);
 	}
 }

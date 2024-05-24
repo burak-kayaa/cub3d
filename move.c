@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:57:12 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/24 17:42:55 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/25 02:06:58 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,15 @@ void	key_left(t_data *data)
 	double	old_planex;
 
 	old_dirx = data->ray->dirx;
-	data->ray->dirx = data->ray->dirx * cos(0.15) - data->ray->diry
-		* sin(0.15);
-	data->ray->diry = old_dirx * sin(0.15) + data->ray->diry
-		* cos(0.15);
+	data->ray->dirx = data->ray->dirx * cos(0.05) - data->ray->diry
+		* sin(0.05);
+	data->ray->diry = old_dirx * sin(0.05) + data->ray->diry
+		* cos(0.05);
 	old_planex = data->ray->planex;
-	data->ray->planex = data->ray->planex * cos(0.15) - data->ray->planey
-		* sin(0.15);
-	data->ray->planey = old_planex * sin(0.15) + data->ray->planey
-		* cos(0.15);
+	data->ray->planex = data->ray->planex * cos(0.05) - data->ray->planey
+		* sin(0.05);
+	data->ray->planey = old_planex * sin(0.05) + data->ray->planey
+		* cos(0.05);
 }
 
 void	key_right(t_data *data)
