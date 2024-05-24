@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:51:00 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/24 17:27:37 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/24 17:48:22 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	check_flood(t_data *data)
 		}
 		i++;
 	}
-	ft_free_array(data->map->flood_fill);
 }
 
 void	flood_fill(t_data *data, int y, int x)

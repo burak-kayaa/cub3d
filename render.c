@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:57:16 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/24 16:57:39 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/24 17:44:06 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,26 @@ void	ft_render_map(t_data *data, int render_fc)
 	}
 	ft_fill_pixel(data, (MINIMAPWIDTH / 2) * TILE_SIZE, \
 		(MINIMAPHEIGHT / 2) * TILE_SIZE, 'P');
+}
+
+void	ft_render_hand(t_data *data)
+{
+	int	x;
+	int	y;
+	int	color;
+
+	x = 0;
+	while (x < 185)
+	{
+		y = 0;
+		while (y < 339)
+		{
+			color = data->images[13]->addr[y * 185 + x];
+			if ((color & 0x00FFFFFF) != 0)
+				data->mlx_o_data[(y + SCREENHEIGHT - 339)
+					* SCREENWIDTH + (x + (SCREENHEIGHT + 585))] = color;
+			y++;
+		}
+		x++;
+	}
 }

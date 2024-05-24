@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 16:07:35 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/24 17:29:58 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/24 17:44:19 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,8 @@ typedef struct s_data
 	t_bool		is_door_open;
 	t_bool		left_pressed;
 	t_bool		right_pressed;
+	t_bool		left_mouse_pressed;
+	t_bool		right_mouse_pressed;
 	t_map		*map;
 	t_ray		*ray;
 	t_images	**images;
@@ -194,10 +196,12 @@ void	key_left(t_data *data);
 void	key_right(t_data *data);
 void	ft_move(t_data *data);
 int		ft_player_move(t_data *data);
+int		mouse_hook(t_data *data);
 
 /* RENDER */
 void	ft_fill_pixel(t_data *data, int x, int y, char type);
 void	ft_render_map(t_data *data, int render_fc);
+void	ft_render_hand(t_data *data);
 
 /* TEXTURE */
 

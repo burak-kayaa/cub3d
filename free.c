@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 17:23:49 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/24 17:24:04 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/24 17:53:39 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,25 +25,28 @@ void	ft_free_array(char **array)
 	free(array);
 }
 
+void	ft_free_map(t_map *map)
+{
+	if (map->floor)
+		ft_free_array(map->floor);
+	if (map->ceiling)
+		ft_free_array(map->ceiling);
+	if (map->map)
+		ft_free_array(map->map);
+	if (map->flood_fill)
+		ft_free_array(map->flood_fill);
+	if (map->wall_textures)
+		ft_free_array(map->wall_textures);
+	free(map);
+}
+
 void	ft_free_data(t_data *data)
 {
 	int	i;
 
-	i = 0;
+	i = 1;
 	if (data->map)
-	{
-		if (data->map->floor)
-			ft_free_array(data->map->floor);
-		if (data->map->ceiling)
-			ft_free_array(data->map->ceiling);
-		if (data->map->map)
-			ft_free_array(data->map->map);
-		if (data->map->flood_fill)
-			ft_free_array(data->map->flood_fill);
-		if (data->map->wall_textures)
-			ft_free_array(data->map->wall_textures);
-		free(data->map);
-	}
+		ft_free_map(data->map);
 	if (data->ray)
 		free(data->ray);
 	if (data->images)
@@ -55,6 +58,7 @@ void	ft_free_data(t_data *data)
 			free(data->images[i]);
 			i++;
 		}
+		free(data->images[0]);
 		free(data->images);
 	}
 	if (data->win_ptr)

@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:57:05 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/24 16:57:44 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/24 17:45:04 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,32 +17,10 @@ int	ft_exit(void *param)
 	t_data	*data;
 
 	data = (t_data *)param;
-	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+	ft_free_data(data);
 	system("killall afplay");
 	exit(0);
 	return (0);
-}
-
-void	ft_render_hand(t_data *data)
-{
-	int	x;
-	int	y;
-	int	color;
-
-	x = 0;
-	while (x < 185)
-	{
-		y = 0;
-		while (y < 339)
-		{
-			color = data->images[13]->addr[y * 185 + x];
-			if ((color & 0x00FFFFFF) != 0)
-				data->mlx_o_data[(y + SCREENHEIGHT - 339)
-					* SCREENWIDTH + (x + (SCREENHEIGHT + 585))] = color;
-			y++;
-		}
-		x++;
-	}
 }
 
 int	key_hook(void *param)
@@ -58,6 +36,32 @@ int	key_hook(void *param)
 	ft_render_hand(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->mlx_img, 0, 0);
 	return (0);
+}
+
+int	mouse_hook(t_data *data)
+{
+	int	*x;
+	int	*y;
+
+	x = malloc(sizeof(int));
+	y = malloc(sizeof(int));
+	mlx_mouse_get_pos(data->win_ptr, x, y);
+	if (*x > SCREENWIDTH / 2 + 50)
+	{
+		data->right_mouse_pressed = 1;
+		data->left_mouse_pressed = 0;
+	}
+	else if (*x < SCREENWIDTH / 2 - 50)
+	{
+		data->left_mouse_pressed = 1;
+		data->right_mouse_pressed = 0;
+	}
+	else
+	{
+		data->left_mouse_pressed = 0;
+		data->right_mouse_pressed = 0;
+	}
+	return (free(x), free(y), 0);
 }
 
 int	key_pressed(int keycode, void *param)
