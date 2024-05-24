@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:56:48 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/24 18:48:28 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/24 22:23:10 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,14 @@
 
 void	ft_get_floor_ceiling(t_data *data)
 {
+	char	**tmp_floor;
+	char	**tmp_ceiling;
+
+	tmp_floor = ft_split(data->map->floor_str, ' ');
+	tmp_ceiling = ft_split(data->map->ceiling_str, ' ');
+	if (ft_tab_len(tmp_floor) != 2 || ft_tab_len(tmp_ceiling) != 2
+		|| ft_strcmp(tmp_floor[0], "F") || ft_strcmp(tmp_ceiling[0], "C"))
+		ft_error("Invalid floor or ceiling color", data);
 	data->map->floor = ft_split(data->map->floor_str + 2, ',');
 	data->map->ceiling = ft_split(data->map->ceiling_str + 2, ',');
 	data->map->floor_color = ft_atoi(data->map->floor[0]) * 65536 + \

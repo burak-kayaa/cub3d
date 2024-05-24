@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:56:59 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/24 16:57:47 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/24 19:32:52 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	ft_load_walls(t_data *data, char *texture, int index)
 		return (1);
 	data->images[index]->img = mlx_xpm_file_to_image(data->mlx_ptr, \
 		texture, &data->images[index]->width, &data->images[index]->height);
+	if (!data->images[index]->img)
+		return (1);
 	data->images[index]->addr = \
 	(int *)mlx_get_data_addr(data->images[index]->img, \
 	&data->images[index]->bits_per_pixel, &data->images[index]->line_length, \

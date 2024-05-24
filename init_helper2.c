@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:56:52 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/24 19:00:28 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/24 22:23:35 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	read_and_concatenate_map(int fd, char **result)
 	return (0);
 }
 
-void	process_map_data(t_data *data, char *map_data)
+int	process_map_data(t_data *data, char *map_data)
 {
 	char	**t;
 	char	**tmp2;
@@ -53,7 +53,11 @@ void	process_map_data(t_data *data, char *map_data)
 
 	t = ft_split_new_lines(map_data);
 	data->map->wall_textures = ft_split(t[0], '\n');
+	if (ft_tab_len(data->map->wall_textures) != 4)
+		return (ft_free_array(t), free(map_data), 1);
 	tmp2 = ft_split(t[1], '\n');
+	if (ft_tab_len(tmp2) != 2)
+		return (ft_free_array(t), ft_free_array(tmp2), free(map_data), 1);
 	data->map->floor_str = ft_strdup(tmp2[0]);
 	data->map->ceiling_str = ft_strdup(tmp2[1]);
 	i = 2;
@@ -66,6 +70,5 @@ void	process_map_data(t_data *data, char *map_data)
 	data->map->map_str = ft_strtrim(_2map, "\n");
 	ft_free_array(t);
 	ft_free_array(tmp2);
-	free(map_data);
-	free(_2map);
+	return (free(map_data), free(_2map), 0);
 }

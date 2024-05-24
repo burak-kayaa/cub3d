@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:56:55 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/24 19:02:00 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/24 19:42:52 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int	ft_read_and_process_map(t_data *data)
 		return (1);
 	if (read_and_concatenate_map(data->map_fd, &map_data))
 		return (1);
-	process_map_data(data, map_data);
+	if (process_map_data(data, map_data))
+		return (1);
 	return (0);
 }
 
@@ -66,6 +67,7 @@ int	ft_create_main_image(t_data *data)
 
 int	ft_init_images(t_data *data)
 {
+	data->images = NULL;
 	if (ft_init_image_array(data))
 		return (1);
 	if (ft_create_main_image(data))

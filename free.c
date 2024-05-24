@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 17:23:49 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/24 17:53:39 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/24 19:28:31 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ void	ft_free_map(t_map *map)
 		ft_free_array(map->map);
 	if (map->flood_fill)
 		ft_free_array(map->flood_fill);
-	if (map->wall_textures)
-		ft_free_array(map->wall_textures);
 	free(map);
 }
 
