@@ -5,43 +5,23 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/13 16:16:01 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/23 19:49:29 by burkaya          ###   ########.fr       */
+/*   Created: 2024/05/24 16:56:55 by burkaya           #+#    #+#             */
+/*   Updated: 2024/05/24 16:57:49 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	ft_map_check(t_data *data)
+int	ft_read_and_process_map(t_data *data)
 {
-	char	*line;
-	char	*tmp;
-	char	**t;
+	char	*map_data;
 
 	data->map_fd = open(data->map_path, O_RDONLY);
 	if (data->map_fd < 0)
 		return (1);
-	tmp = ft_strdup("");
-	while (1)
-	{
-		line = get_next_line(data->map_fd);
-		if (!line)
-			break ;
-		tmp = ft_strjoin_gnl(tmp, line);
-	}
-	t = ft_split_new_lines(tmp);
-	data->map->wall_textures = ft_split(t[0], '\n');
-	char **tmp2 = ft_split(t[1], '\n');
-	data->map->floor_str = ft_strdup(tmp2[0]);
-	data->map->ceiling_str = ft_strdup(tmp2[1]);
-	int i = 2;
-	char *_2map = ft_strdup("");
-	while (t[i])
-	{
-		_2map = ft_strjoin_gnl(_2map, t[i]);
-		i++;
-	}
-	data->map->map_str = ft_strtrim(_2map, "\n");
+	if (read_and_concatenate_map(data->map_fd, &map_data))
+		return (1);
+	process_map_data(data, map_data);
 	return (0);
 }
 
@@ -51,7 +31,7 @@ int	ft_init_image_array(t_data *data)
 	char	*texture;
 	int		i;
 
-	if (ft_map_check(data))
+	if (ft_read_and_process_map(data))
 		return (1);
 	data->images = malloc(sizeof(t_images *) * (TOTAL_TEXTURES + 1));
 	if (!data->images)

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/21 21:46:45 by codespace         #+#    #+#             */
-/*   Updated: 2024/05/23 19:57:25 by burkaya          ###   ########.fr       */
+/*   Created: 2024/05/24 16:56:48 by burkaya           #+#    #+#             */
+/*   Updated: 2024/05/24 16:57:52 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,25 +22,11 @@ void	ft_get_floor_ceiling(t_data *data)
 		ft_atoi(data->map->ceiling[1]) * 256 + ft_atoi(data->map->ceiling[2]);
 }
 
-static int ft_is_multiple_map(char *str)
+int	ft_get_longest_index(char **map)
 {
-	int i;
-
-	i = 0;
-	while (str[i] && str[i + 1])
-	{
-		if (str[i] == '\n' && str[i + 1] == '\n')
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-static int ft_get_longest_index(char **map)
-{
-	int i;
-	int j;
-	int max;
+	int	i;
+	int	j;
+	int	max;
 
 	i = 0;
 	max = 0;
@@ -71,7 +57,6 @@ void	ft_create_map(t_data *data)
 	data->map->map_x = ft_get_longest_index(data->map->map);
 	data->map->map_y = ft_tab_len(data->map->map);
 }
-
 
 void	ft_free_images(t_data *data, int max)
 {

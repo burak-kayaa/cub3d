@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/13 17:59:24 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/23 19:49:11 by burkaya          ###   ########.fr       */
+/*   Created: 2024/05/24 16:57:05 by burkaya           #+#    #+#             */
+/*   Updated: 2024/05/24 16:57:44 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_exit(void *param)
 	return (0);
 }
 
-static void	ft_render_hand(t_data *data)
+void	ft_render_hand(t_data *data)
 {
 	int	x;
 	int	y;
@@ -89,7 +89,6 @@ int	key_released(int keycode, void *param)
 	t_data	*data;
 
 	data = (t_data *)param;
-	// system("say -v Yelda \"sademir\" &");
 	if (keycode == W_KEY)
 		data->w_pressed = 0;
 	if (keycode == A_KEY)

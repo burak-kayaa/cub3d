@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/13 18:01:58 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/23 20:08:27 by burkaya          ###   ########.fr       */
+/*   Created: 2024/05/24 16:57:16 by burkaya           #+#    #+#             */
+/*   Updated: 2024/05/24 16:57:39 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ void	ft_render_map_helper(t_data *data, int i, int j)
 		|| data->ray->user_y - (MINIMAPHEIGHT / 2) + i < 0
 		|| data->ray->user_x - (MINIMAPHEIGHT / 2) + j >= data->map->map_x
 		|| data->ray->user_y - (MINIMAPHEIGHT / 2) + i >= data->map->map_y
-		|| data->map->map[data->ray->user_y - (MINIMAPHEIGHT / 2) + i][data->ray->user_x - (MINIMAPHEIGHT / 2) + j] == '*'
+		|| data->map->map[data->ray->user_y - (MINIMAPHEIGHT / 2) \
+		+ i][data->ray->user_x - (MINIMAPHEIGHT / 2) + j] == '*'
 	)
 		ft_fill_pixel(data, j * TILE_SIZE, i * TILE_SIZE, '*');
 	else if (data->map->map[data->ray->user_y - (MINIMAPHEIGHT / 2) + i]

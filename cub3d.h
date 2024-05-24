@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 16:07:35 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/23 19:30:31 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/24 16:51:54 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ typedef struct s_map
 	char	**map;
 	char	**flood_fill;
 	char	**wall_textures;
-	char 	*floor_str;
-	char 	*ceiling_str;
+	char	*floor_str;
+	char	*ceiling_str;
 	char	*map_str;
 }				t_map;
 
@@ -129,72 +129,94 @@ typedef struct s_data
 }				t_data;
 
 /* CHECK */
-int			check_extension(char *file);
-int			ft_check_input(t_data *data, char **argv);
-void		ft_check_map(t_data *data);
+int		check_extension(char *file);
+int		ft_check_input(t_data *data, char **argv);
+void	ft_check_map(t_data *data);
+int		player(char c);
+void	ft_error(char *str, t_data *data);
+void	check_player_amount(t_data *data);
+void	check_map_characters(t_data *data);
+void	ft_print_map(char **map);
+void	flood_fill(t_data *data, int y, int x);
+void	check_flood(t_data *data);
 
 /* DRAW */
-void		ft_ray_casting(t_data *data);
-void		ft_direction(t_data *data);
-void		ft_check_wallhit(t_data *data);
-void		ft_wallhit(t_data *data);
-void		ft_raydist(t_data *data);
-void		ft_send_ray(t_data *data, int x);
-void		ft_wall_check(t_data *data);
-void		ft_wall_check1(t_data *data);
-void		ft_send_ray_for_sp(t_data *data, int x, int i);
+void	ft_check_wallhit(t_data *data);
+void	ft_wallhit(t_data *data);
+void	ft_raydist(t_data *data);
+void	ft_send_ray(t_data *data, int x);
+
+/* DRAW_HELPER */
+void	ft_ray_casting_for_sp(t_data *data, int x, int i);
+void	ft_ray_casting(t_data *data);
+void	ft_direction(t_data *data);
+void	ft_wall_check(t_data *data);
+void	ft_wall_check1(t_data *data);
+int		ft_load_walls(t_data *data, char *texture, int index);
+void	ft_load_other_images(t_data *data, int i);
+
+/* DRAW_SP */
+int		ft_check_sphit(t_data *data);
+int		ft_sphit(t_data *data);
+void	ft_send_ray_for_sp(t_data *data, int x, int i);
 
 /* INIT */
-void		ft_create_map(t_data *data);
-void		ft_free_images(t_data *data, int max);
-void		ft_init_ray(t_ray *ray);
-void		ft_load_image(t_data *data, char *texture, int index);
-int			ft_init_image_array(t_data *data);
-int			ft_create_main_image(t_data *data);
-int			ft_init_images(t_data *data);
-int			ft_init(t_data *data);
-void		ft_load_other_images(t_data *data, int i);
-void		ft_load_image(t_data *data, char *texture, int index);
-int			ft_load_walls(t_data *data, char *texture, int index);
+int		ft_read_and_process_map(t_data *data);
+int		ft_init_image_array(t_data *data);
+int		ft_create_main_image(t_data *data);
+int		ft_init_images(t_data *data);
+int		ft_init(t_data *data);
+
+/* INIT_HELPER */
+void	ft_get_floor_ceiling(t_data *data);
+int		ft_get_longest_index(char **map);
+void	ft_create_map(t_data *data);
+void	ft_free_images(t_data *data, int max);
+void	ft_init_ray(t_ray *ray);
+
+/* INIT_HELPER2 */
+int		ft_is_multiple_map(char *str);
+int		read_and_concatenate_map(int fd, char **result);
+void	process_map_data(t_data *data, char *map_data);
 
 /* MLX */
-int			ft_exit(void *param);
-int			key_hook(void *param);
-int			key_pressed(int keycode, void *param);
-int			key_released(int keycode, void *param);
-void		ft_draw_square_on_coords(t_data *data, int x, int y, int color);
+int		ft_exit(void *param);
+int		key_hook(void *param);
+int		key_pressed(int keycode, void *param);
+int		key_released(int keycode, void *param);
+void	ft_draw_square_on_coords(t_data *data, int x, int y, int color);
 
 /* MOVE */
-int			is_character(char c, t_data *data);
-void		key_w(t_data *data);
-void		key_s(t_data *data);
-void		key_d(t_data *data);
-void		key_a(t_data *data);
-void		key_left(t_data *data);
-void		key_right(t_data *data);
-void		ft_move(t_data *data);
-int			ft_player_move(t_data *data);
+int		is_character(char c, t_data *data);
+void	key_w(t_data *data);
+void	key_s(t_data *data);
+void	key_d(t_data *data);
+void	key_a(t_data *data);
+void	key_left(t_data *data);
+void	key_right(t_data *data);
+void	ft_move(t_data *data);
+int		ft_player_move(t_data *data);
 
 /* RENDER */
-void		ft_fill_pixel(t_data *data, int x, int y, char type);
-void		ft_render_map(t_data *data, int render_fc);
+void	ft_fill_pixel(t_data *data, int x, int y, char type);
+void	ft_render_map(t_data *data, int render_fc);
 
 /* TEXTURE */
 
-void		ft_texture_helper(t_data *data);
-void		ft_draw_wall_texture(t_data *data, int x, int tex_index);
-void		ft_draw_wall_side(t_data *data, int x, int f_flag);
-void		ft_texture(t_data *data, int x, int f_flag);
+void	ft_texture_helper(t_data *data);
+void	ft_draw_wall_texture(t_data *data, int x, int tex_index);
+void	ft_draw_wall_side(t_data *data, int x, int f_flag);
+void	ft_texture(t_data *data, int x, int f_flag);
 
 /* UTILS */
-void		ft_fill_floor_and_ceiling(t_data *data);
-int			ft_tab_len(char **tab);
-char		**ft_split_new_lines(char const *s);
+void	ft_fill_floor_and_ceiling(t_data *data);
+int		ft_tab_len(char **tab);
+char	**ft_split_new_lines(char const *s);
 
 /* MAIN */
-void		ft_set_direction(t_data *data, char c);
-void		ft_set_plane(t_data *data, char c);
-void		ft_get_direction(t_data *data, char c);
-void		ft_get_player_location(t_data *data);
+void	ft_set_direction(t_data *data, char c);
+void	ft_set_plane(t_data *data, char c);
+void	ft_get_direction(t_data *data, char c);
+void	ft_get_player_location(t_data *data);
 
 #endif
