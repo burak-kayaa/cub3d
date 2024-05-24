@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:56:48 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/24 16:57:52 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/24 17:25:29 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,8 @@ int	ft_get_longest_index(char **map)
 
 void	ft_create_map(t_data *data)
 {
-	char		*tmp;
-
-	tmp = ft_strdup("");
 	if (ft_is_multiple_map(data->map->map_str))
-	{
-		printf("Error\nMultiple maps detected\n");
-		exit(1);
-	}
+		ft_error("Multiple maps", data);
 	data->map->map = ft_split(data->map->map_str, '\n');
 	data->map->flood_fill = ft_split(data->map->map_str, '\n');
 	data->map->map_x = ft_get_longest_index(data->map->map);

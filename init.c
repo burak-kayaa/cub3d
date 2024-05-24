@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:56:55 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/24 16:57:49 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/24 17:22:46 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,7 @@ int	ft_create_main_image(t_data *data)
 	data->mlx_img = mlx_new_image(data->mlx_ptr, SCREENWIDTH, SCREENHEIGHT);
 	data->images[0] = malloc(sizeof(t_images));
 	if (!data->images[0])
-	{
-		ft_free_images(data, TOTAL_TEXTURES + 1);
-		return (1);
-	}
+		return (ft_free_images(data, TOTAL_TEXTURES + 1), 1);
 	data->mlx_o_data = (int *)mlx_get_data_addr(data->mlx_img, \
 	&data->images[0]->bits_per_pixel, &data->images[0]->line_length, \
 	&data->images[0]->endian);
@@ -87,12 +84,10 @@ int	ft_init(t_data *data)
 	data->left_pressed = 0;
 	data->right_pressed = 0;
 	data->is_door_open = 0;
+	check_extension(data->map_path);
 	data->ray = malloc(sizeof(t_ray));
 	ft_init_ray(data->ray);
 	data->map = malloc(sizeof(t_map));
-	data->map->map_x = 45;
-	data->map->map_y = 17;
-	data->map->map_s = data->map->map_x * data->map->map_y;
 	if (ft_init_images(data))
 		return (free(data->ray), free(data->map), free(data), 1);
 	return (0);

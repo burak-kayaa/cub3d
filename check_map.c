@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 09:25:03 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/24 16:54:01 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/24 17:28:23 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ void	get_new_map(t_data *data)
 		i++;
 	}
 	mapp[i] = NULL;
+	ft_free_array(data->map->map);
 	data->map->map = mapp;
 }
 

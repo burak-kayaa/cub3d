@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 02:10:46 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/24 16:50:42 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/24 17:29:00 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ void	ft_get_player_location(t_data *data)
 		}
 		i++;
 	}
+	ft_error("Player not found", data);
 }
 
 int	main(int argc, char **argv)
@@ -101,11 +102,7 @@ int	main(int argc, char **argv)
 	data->map_path = argv[1];
 	if (ft_init(data))
 		return (printf("Error\n"), 0);
-	if (ft_check_input(data, argv))
-		return (printf("Error\n"), 0);
 	ft_create_map(data);
-	if (!data->map->map)
-		return (free(data->ray), free(data->map), free(data), 1);
 	ft_get_player_location(data);
 	system("afplay ./regular_show.mpeg &");
 	ft_check_map(data);
@@ -115,4 +112,5 @@ int	main(int argc, char **argv)
 	mlx_hook(data->win_ptr, 2, 0, key_pressed, data);
 	mlx_hook(data->win_ptr, 17, 0, ft_exit, data);
 	mlx_loop(data->mlx_ptr);
+	ft_free_data(data);
 }

@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:51:00 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/24 16:53:54 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/24 17:27:37 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,12 @@ void	check_flood(t_data *data)
 			if (player(data->map->flood_fill[i][j])
 			|| data->map->flood_fill[i][j] == '0' \
 			|| data->map->flood_fill[i][j] == '1')
-			{
-				ft_print_map(data->map->flood_fill);
-				printf("data->map->flood_fill[%d][%d]: %c\n", i, j, \
-				data->map->flood_fill[i][j]);
-				ft_error("hata", data);
-				exit(0);
-			}
+				ft_error("Multiple maps", data);
 			j++;
 		}
 		i++;
 	}
+	ft_free_array(data->map->flood_fill);
 }
 
 void	flood_fill(t_data *data, int y, int x)

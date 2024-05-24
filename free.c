@@ -1,0 +1,75 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/24 17:23:49 by burkaya           #+#    #+#             */
+/*   Updated: 2024/05/24 17:24:04 by burkaya          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "cub3d.h"
+
+void	ft_free_array(char **array)
+{
+	int	i;
+
+	i = 0;
+	while (array[i])
+	{
+		free(array[i]);
+		i++;
+	}
+	free(array);
+}
+
+void	ft_free_data(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	if (data->map)
+	{
+		if (data->map->floor)
+			ft_free_array(data->map->floor);
+		if (data->map->ceiling)
+			ft_free_array(data->map->ceiling);
+		if (data->map->map)
+			ft_free_array(data->map->map);
+		if (data->map->flood_fill)
+			ft_free_array(data->map->flood_fill);
+		if (data->map->wall_textures)
+			ft_free_array(data->map->wall_textures);
+		free(data->map);
+	}
+	if (data->ray)
+		free(data->ray);
+	if (data->images)
+	{
+		while (data->images[i])
+		{
+			if (data->images[i]->img)
+				mlx_destroy_image(data->mlx_ptr, data->images[i]->img);
+			free(data->images[i]);
+			i++;
+		}
+		free(data->images);
+	}
+	if (data->win_ptr)
+		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+	if (data->mlx_ptr)
+		free(data->mlx_ptr);
+	free(data);
+}
+
+void	ft_error(char *str, t_data *data)
+{
+	ft_putstr_fd("Error\n", 2);
+	ft_putstr_fd(str, 2);
+	ft_putchar_fd('\n', 2);
+	if (data)
+		ft_free_data(data);
+	exit(0);
+}

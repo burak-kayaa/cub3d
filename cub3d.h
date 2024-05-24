@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 16:07:35 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/24 16:51:54 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/24 17:29:58 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,6 @@ typedef struct s_data
 
 /* CHECK */
 int		check_extension(char *file);
-int		ft_check_input(t_data *data, char **argv);
 void	ft_check_map(t_data *data);
 int		player(char c);
 void	ft_error(char *str, t_data *data);
@@ -184,7 +183,6 @@ int		ft_exit(void *param);
 int		key_hook(void *param);
 int		key_pressed(int keycode, void *param);
 int		key_released(int keycode, void *param);
-void	ft_draw_square_on_coords(t_data *data, int x, int y, int color);
 
 /* MOVE */
 int		is_character(char c, t_data *data);
@@ -212,6 +210,8 @@ void	ft_texture(t_data *data, int x, int f_flag);
 void	ft_fill_floor_and_ceiling(t_data *data);
 int		ft_tab_len(char **tab);
 char	**ft_split_new_lines(char const *s);
+void	ft_free_array(char **array);
+void	ft_free_data(t_data *data);
 
 /* MAIN */
 void	ft_set_direction(t_data *data, char c);
