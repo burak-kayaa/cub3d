@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:57:16 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/24 17:44:06 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/25 15:02:50 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,32 @@ void	ft_render_map(t_data *data, int render_fc)
 		(MINIMAPHEIGHT / 2) * TILE_SIZE, 'P');
 }
 
+void	ft_render_hand_helper(t_data *data, int color, int y, int x)
+{
+	int			move;
+	static int	i = 0;
+
+	move = 10;
+	if ((color & 0x00FFFFFF) != 0)
+	{
+		if (data->a_pressed || data->d_pressed
+			|| data->s_pressed || data->w_pressed)
+		{
+			if ((i / 500000) % 2 == 1)
+				data->mlx_o_data[(y + SCREENHEIGHT - 339)
+					* (SCREENWIDTH) + \
+					(x + (SCREENHEIGHT + 575 - move))] = color;
+			else
+				data->mlx_o_data[(y + SCREENHEIGHT - 339)
+					* SCREENWIDTH + (x + (SCREENHEIGHT + 575 + move))] = color;
+			i++;
+		}
+		else
+			data->mlx_o_data[(y + SCREENHEIGHT - 339)
+				* SCREENWIDTH + (x + (SCREENHEIGHT + 585))] = color;
+	}
+}
+
 void	ft_render_hand(t_data *data)
 {
 	int	x;
@@ -96,9 +122,7 @@ void	ft_render_hand(t_data *data)
 		while (y < 339)
 		{
 			color = data->images[13]->addr[y * 185 + x];
-			if ((color & 0x00FFFFFF) != 0)
-				data->mlx_o_data[(y + SCREENHEIGHT - 339)
-					* SCREENWIDTH + (x + (SCREENHEIGHT + 585))] = color;
+			ft_render_hand_helper(data, color, y, x);
 			y++;
 		}
 		x++;
