@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:57:21 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/24 16:57:37 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/25 12:45:09 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,4 @@ void	ft_texture(t_data *data, int x, int f_flag)
 		ft_draw_wall_side(data, x, f_flag);
 	else if (data->ray->wall == 2)
 		ft_draw_wall_texture(data, x, 5);
-	else if (data->ray->wall == 4)
-		ft_draw_wall_texture(data, x, 7);
 }

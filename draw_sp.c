@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:56:32 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/24 16:57:59 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/25 13:47:52 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,8 @@
 
 int	ft_check_sphit(t_data *data)
 {
-	if (data->ray->map_x >= data->map->map_x
-		|| data->ray->map_y >= data->map->map_y || data->ray->map_x <= 0
-		|| data->ray->map_y <= 0
-		|| data->map->map[data->ray->map_x][data->ray->map_y] == '1'
-		|| data->map->map[data->ray->map_x][data->ray->map_y] == '2')
+	if (data->map->map[data->ray->map_x][data->ray->map_y] == '1'
+		|| (data->map->map[data->ray->map_x][data->ray->map_y] == '2'))
 		return (1);
 	if (data->map->map[data->ray->map_x][data->ray->map_y] == 'U')
 		data->ray->wall = 4;
