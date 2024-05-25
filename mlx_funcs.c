@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:57:05 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/24 18:16:22 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/25 11:40:06 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ int	mouse_hook(t_data *data)
 	x = malloc(sizeof(int));
 	y = malloc(sizeof(int));
 	mlx_mouse_get_pos(data->win_ptr, x, y);
-	if (*x > SCREENWIDTH / 2 + 50)
+	if (*x > SCREENWIDTH / 2 + 100)
 	{
 		data->right_mouse_pressed = 1;
 		data->left_mouse_pressed = 0;
 	}
-	else if (*x < SCREENWIDTH / 2 - 50)
+	else if (*x < SCREENWIDTH / 2 - 100)
 	{
 		data->left_mouse_pressed = 1;
 		data->right_mouse_pressed = 0;

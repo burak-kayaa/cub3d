@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:56:48 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/25 02:02:59 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/25 11:33:52 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@ void	ft_get_floor_ceiling(t_data *data)
 {
 	char	**tmp_floor;
 	char	**tmp_ceiling;
+	int		i;
 
+	i = -1;
 	tmp_floor = ft_split(data->map->floor_str, ' ');
 	tmp_ceiling = ft_split(data->map->ceiling_str, ' ');
 	if (ft_tab_len(tmp_floor) != 2 || ft_tab_len(tmp_ceiling) != 2
@@ -24,6 +26,14 @@ void	ft_get_floor_ceiling(t_data *data)
 		ft_error("Invalid floor or ceiling color", data);
 	data->map->floor = ft_split(data->map->floor_str + 2, ',');
 	data->map->ceiling = ft_split(data->map->ceiling_str + 2, ',');
+	while (++i < 3)
+	{
+		if (ft_atoi(data->map->floor[i]) > 255
+			|| ft_atoi(data->map->ceiling[i]) > 255
+			|| ft_atoi(data->map->floor[i]) < 0
+			|| ft_atoi(data->map->ceiling[i]) < 0)
+			ft_error("zort", data);
+	}
 	data->map->floor_color = ft_atoi(data->map->floor[0]) * 65536 + \
 		ft_atoi(data->map->floor[1]) * 256 + ft_atoi(data->map->floor[2]);
 	data->map->ceiling_color = ft_atoi(data->map->ceiling[0]) * 65536 + \
