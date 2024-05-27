@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map_helper.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
+/*   By: egumus <egumus@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:56:17 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/24 17:24:01 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/27 04:37:10 by egumus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,5 @@ void	ft_print_map(char **map)
 		ft_putchar_fd('\n', 2);
 		i++;
 	}
+	printf("\n");
 }

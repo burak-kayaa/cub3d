@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
+/*   By: egumus <egumus@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:56:36 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/24 16:57:57 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/27 05:27:47 by egumus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,7 @@ void	ft_check_wallhit(t_data *data)
 		data->map->map[data->ray->map_x][data->ray->map_y] == '2')
 	{
 		if (data->map->map[data->ray->map_x][data->ray->map_y] == '2')
-		{
-			if (!data->is_door_open)
-				data->ray->wall = 2;
-			else
-				data->ray->wall = 3;
-		}
+			data->ray->wall = 2;
 		else if (data->map->map[data->ray->map_x][data->ray->map_y] == 'U')
 			data->ray->wall = 4;
 		else
