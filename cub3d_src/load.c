@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:56:59 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/27 16:27:11 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/27 16:52:25 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	ft_load_walls(t_data *data, char *texture, int index)
 	(int *)mlx_get_data_addr(data->images[index]->img, \
 	&data->images[index]->bits_per_pixel, &data->images[index]->line_length, \
 	&data->images[index]->endian);
+	free(texture);
 	return (0);
 }
 

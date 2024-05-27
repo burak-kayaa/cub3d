@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:56:48 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/25 11:33:52 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/27 16:50:52 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,17 @@ void	ft_get_floor_ceiling(t_data *data)
 	data->map->floor = ft_split(data->map->floor_str + 2, ',');
 	data->map->ceiling = ft_split(data->map->ceiling_str + 2, ',');
 	while (++i < 3)
-	{
 		if (ft_atoi(data->map->floor[i]) > 255
 			|| ft_atoi(data->map->ceiling[i]) > 255
 			|| ft_atoi(data->map->floor[i]) < 0
 			|| ft_atoi(data->map->ceiling[i]) < 0)
 			ft_error("zort", data);
-	}
 	data->map->floor_color = ft_atoi(data->map->floor[0]) * 65536 + \
 		ft_atoi(data->map->floor[1]) * 256 + ft_atoi(data->map->floor[2]);
 	data->map->ceiling_color = ft_atoi(data->map->ceiling[0]) * 65536 + \
 		ft_atoi(data->map->ceiling[1]) * 256 + ft_atoi(data->map->ceiling[2]);
+	ft_free_array(tmp_floor);
+	ft_free_array(tmp_ceiling);
 }
 
 int	ft_get_longest_index(char **map)
