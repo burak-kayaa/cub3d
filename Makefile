@@ -1,4 +1,4 @@
-SRCS	= check.c draw.c doors.c draw_helper.c init.c init_helper.c init_helper2.c ft_split_new_lines.c main.c mlx_funcs.c move.c move_helper.c render.c texture.c utils.c wall_check.c draw_sp.c load.c check_map.c check_map_helper.c flood_fill.c free.c
+SRCS	= check.c draw.c doors.c draw_helper.c init.c init_helper.c init_helper2.c ft_split_new_lines.c main.c mlx_funcs.c move.c move_helper.c render.c texture.c utils.c wall_check.c draw_sp.c load.c check_map.c check_map_helper.c flood_fill.c free.c doors_helper.c
 OBJS	= $(SRCS:.c=.o)
 
 # Path: src/Makefile

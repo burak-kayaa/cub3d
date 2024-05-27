@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egumus <egumus@student.42istanbul.com.t    +#+  +:+       +#+        */
+/*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:56:55 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/27 00:28:18 by egumus           ###   ########.fr       */
+/*   Updated: 2024/05/27 15:12:53 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ int	ft_init(t_data *data)
 	data->left_mouse_pressed = 0;
 	data->right_mouse_pressed = 0;
 	data->is_door_open = 0;
-	check_extension(data->map_path);
 	data->ray = malloc(sizeof(t_ray));
 	ft_init_ray(data->ray);
 	data->map = malloc(sizeof(t_map));

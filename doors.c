@@ -3,53 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   doors.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egumus <egumus@student.42istanbul.com.t    +#+  +:+       +#+        */
+/*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 00:28:44 by egumus            #+#    #+#             */
-/*   Updated: 2024/05/27 06:42:42 by egumus           ###   ########.fr       */
+/*   Updated: 2024/05/27 15:27:43 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	ft_open_door_map(t_data *data, t_door *door, int x, int y)
+void	ft_init_doors_helper(t_data *data)
 {
-	if (data->map->map[y][x] == DOOR_CHAR)
-	{
-		data->map->map[y][x] = FLOOR_CHAR;
-		door->is_open = 1;
-	}
-}
-
-void	ft_close_door_map(t_data *data, t_door *door, int x, int y)
-{
-	if (data->map->map[y][x] == FLOOR_CHAR)
-	{
-		data->map->map[y][x] = DOOR_CHAR;
-		door->is_open = 0;
-	}
-}
-
-void	ft_init_doors(t_data *data)
-{
-	int	x;
-	int	y;
 	int	count;
+	int	y;
+	int	x;
 
-	y = -1;
-	count = 0;
-	while (++y < data->map->map_y)
-	{
-		x = -1;
-		while (++x < (int)ft_strlen(data->map->map[y]))
-		{
-			if (data->map->map[y][x] == DOOR_CHAR)
-				count++;
-		}
-	}
-	data->doors = malloc(sizeof(t_door) * (count + 1));
-	if (!data->doors)
-		ft_error("Memory allocation error", data);
 	y = -1;
 	count = 0;
 	while (++y < data->map->map_y)
@@ -72,38 +40,27 @@ void	ft_init_doors(t_data *data)
 	data->doors[count] = NULL;
 }
 
-void	ft_toggle_door(t_data *data, int door_index)
+void	ft_init_doors(t_data *data)
 {
-	if (data->doors[door_index]->is_open)
-		ft_close_door_map(data, data->doors[door_index], data->doors[door_index]->x, data->doors[door_index]->y);
-	else
-		ft_open_door_map(data, data->doors[door_index], data->doors[door_index]->x, data->doors[door_index]->y);
-}
+	int	x;
+	int	y;
+	int	count;
 
-t_door	*ft_get_door_by_location(t_data *data, int x, int y)
-{
-	int	i;
-
-	i = -1;
-	while (++i < data->map->map_y)
+	y = -1;
+	count = 0;
+	while (++y < data->map->map_y)
 	{
-		if (data->doors[i]->x == x && data->doors[i]->y == y)
-			return (data->doors[i]);
+		x = -1;
+		while (++x < (int)ft_strlen(data->map->map[y]))
+		{
+			if (data->map->map[y][x] == DOOR_CHAR)
+				count++;
+		}
 	}
-	return (NULL);
-}
-
-int	ft_get_door_index(t_data *data, t_door *door)
-{
-	int	i;
-
-	i = -1;
-	while (++i < data->map->map_y)
-	{
-		if (data->doors[i] == door)
-			return (i);
-	}
-	return (-1);
+	data->doors = malloc(sizeof(t_door) * (count + 1));
+	if (!data->doors)
+		ft_error("Memory allocation error", data);
+	ft_init_doors_helper(data);
 }
 
 void	ft_close_all_doors(t_data *data)
@@ -128,29 +85,9 @@ void	ft_close_all_doors(t_data *data)
 	}
 }
 
-int	ft_is_player_in_or_around_wall(t_data *data, t_door *door)
-{
-	int	player_x;
-	int	player_y;
-
-	player_x = (int)data->ray->posx;
-	player_y = (int)data->ray->posy;
-	if ((door->y + 1 == player_x && door->x == player_y)
-		|| (door->y - 1 == player_x && door->x == player_y)
-		|| (door->y == player_x && door->x + 1 == player_y) 
-		|| (door->y == player_x && door->x - 1 == player_y)
-		|| (door->y + 1 == player_x && door->x + 1 == player_y)
-		|| (door->y + 1 == player_x && door->x - 1 == player_y)
-		|| (door->y - 1 == player_x && door->x + 1 == player_y)
-		|| (door->y - 1 == player_x && door->x - 1 == player_y)
-		|| (door->y == player_x && door->x == player_y))
-		return (1);
-	return (0);
-}
-
 int	ft_is_any_door_open(t_data *data)
 {
-	int	i;
+	int		i;
 	t_door	*door;
 
 	i = 0;
@@ -169,7 +106,7 @@ int	ft_is_any_door_open(t_data *data)
 void	ft_open_closest_door_by_player(t_data *data)
 {
 	int		i;
-	t_door *door;
+	t_door	*door;
 
 	if (data->doors == NULL)
 		return ;
@@ -181,7 +118,12 @@ void	ft_open_closest_door_by_player(t_data *data)
 	{
 		if (ft_is_player_in_or_around_wall(data, door))
 		{
-			ft_toggle_door(data, i);
+			if (data->doors[i]->is_open)
+				ft_close_door_map(data, data->doors[i], \
+					data->doors[i]->x, data->doors[i]->y);
+			else
+				ft_open_door_map(data, data->doors[i], \
+					data->doors[i]->x, data->doors[i]->y);
 			break ;
 		}
 		door = data->doors[++i];

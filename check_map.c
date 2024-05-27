@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egumus <egumus@student.42istanbul.com.t    +#+  +:+       +#+        */
+/*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 09:25:03 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/27 06:40:01 by egumus           ###   ########.fr       */
+/*   Updated: 2024/05/27 15:13:28 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ void	ft_check_border(t_data *data)
 			if (i == 0 || i == data->map->map_y - 1 || j == 0 \
 			|| j == (int)ft_strlen(data->map->map[i]) - 1)
 			{
-				if (data->map->map[i][j] != WALL_CHAR && data->map->map[i][j] != '*')
+				if (data->map->map[i][j] != WALL_CHAR
+				&& data->map->map[i][j] != '*')
 					ft_error("Map is not closed from border", data);
 			}
 			j++;

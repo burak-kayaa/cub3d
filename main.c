@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egumus <egumus@student.42istanbul.com.t    +#+  +:+       +#+        */
+/*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 02:10:46 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/27 13:13:27 by egumus           ###   ########.fr       */
+/*   Updated: 2024/05/27 15:33:12 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,10 @@ void	ft_get_player_location(t_data *data)
 		j = 0;
 		while (data->map->map[i][j])
 		{
-			if (data->map->map[i][j] == NORTH_CHAR || data->map->map[i][j] == SOUTH_CHAR
-				|| data->map->map[i][j] == WEST_CHAR || data->map->map[i][j] == EAST_CHAR)
+			if (data->map->map[i][j] == NORTH_CHAR
+			|| data->map->map[i][j] == SOUTH_CHAR
+			|| data->map->map[i][j] == WEST_CHAR
+			|| data->map->map[i][j] == EAST_CHAR)
 			{
 				data->ray->posx = i + 0.5;
 				data->ray->posy = j + 0.5;
@@ -100,12 +102,13 @@ int	main(int argc, char **argv)
 		return (printf("Error\n"), 0);
 	data = malloc(sizeof(t_data));
 	data->map_path = argv[1];
+	check_extension(data->map_path);
 	if (ft_init(data))
 		return (printf("Error\n"), 0);
 	ft_create_map(data);
 	ft_get_player_location(data);
 	ft_init_doors(data);
-	system("afplay ./regular_show.mpeg &");
+	system("afplay ./audios/regular_show.mpeg &");
 	ft_check_map(data);
 	mlx_mouse_move(data->win_ptr, SCREENWIDTH / 2, SCREENHEIGHT / 2);
 	mlx_loop_hook(data->mlx_ptr, key_hook, data);

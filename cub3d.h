@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egumus <egumus@student.42istanbul.com.t    +#+  +:+       +#+        */
+/*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 16:07:35 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/27 06:43:40 by egumus           ###   ########.fr       */
+/*   Updated: 2024/05/27 15:29:32 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,7 +204,7 @@ int		key_pressed(int keycode, void *param);
 int		key_released(int keycode, void *param);
 
 /* MOVE */
-int		is_character(t_data *data, int x, int y);
+int		is_character(char c);
 void	key_w(t_data *data);
 void	key_s(t_data *data);
 void	key_d(t_data *data);
@@ -224,11 +224,9 @@ void	ft_render_hand(t_data *data);
 void	ft_open_door_map(t_data *data, t_door *door, int x, int y);
 void	ft_close_door_map(t_data *data, t_door *door, int x, int y);
 void	ft_init_doors(t_data *data);
-void	ft_toggle_door(t_data *data, int door_index);
 void	ft_open_closest_door_by_player(t_data *data);
-t_door	*ft_get_door_by_location(t_data *data, int x, int y);
-int		ft_get_door_index(t_data *data, t_door *door);
 void	ft_close_all_doors(t_data *data);
+int		ft_is_player_in_or_around_wall(t_data *data, t_door *door);
 
 /* TEXTURE */
 
