@@ -15,7 +15,8 @@
 		"stdlib.h": "c",
 		"__string": "c",
 		"ios": "c",
-		"type_traits": "c"
+		"type_traits": "c",
+		"mlx.h": "c"
 	},
 	"files.exclude": {
         "**/**.o": true,

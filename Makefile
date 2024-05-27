@@ -1,37 +1,30 @@
-SRCS	= check.c draw.c doors.c draw_helper.c init.c init_helper.c init_helper2.c ft_split_new_lines.c main.c mlx_funcs.c move.c move_helper.c render.c texture.c utils.c wall_check.c draw_sp.c load.c check_map.c check_map_helper.c flood_fill.c free.c doors_helper.c
-OBJS	= $(SRCS:.c=.o)
+MAN_PATH=./cub3d_src
+BONUS_PATH=./cub3d_bonus_src
+MAN_EXEC_NAME=cub3D
+BONUS_EXEC_NAME=cub3D_bonus
 
-# Path: src/Makefile
-NAME	= cub3D
-CC		= gcc
-CFLAGS	= -Wall -Wextra -Werror -g -fsanitize=address
-RM		= rm -f
-MLX		= ./mlx/libmlx.a
-MLX_DIR	= ./mlx
-LIBFT	= ./libft/libft.a
-all: $(NAME)
-
-$(NAME): $(OBJS) $(LIBFT) $(MLX)
-	$(CC) $(CFLAGS) $(OBJS) -L $(MLX_DIR) -lmlx -framework OpenGL -framework AppKit -L ./libft -lft -o $(NAME) 
-
-$(LIBFT):
-	make -j16 -C ./libft
-
-$(MLX):
-	make -j16 -C ./mlx 2> /dev/null
+all:
+	@make -C $(MAN_PATH)
 
 clean:
-	$(RM) $(OBJS)
-	make clean -C ./libft
-	make clean -C ./mlx
+	@make clean -C $(MAN_PATH)
+	@make clean -C $(BONUS_PATH)
 
-fclean: clean
-	$(RM) $(NAME)
-	make fclean -C ./libft
+fclean:
+	@make fclean -C $(MAN_PATH)
+	@make fclean -C $(BONUS_PATH)
+	@if [ -e "$(MAN_EXEC_NAME)" ]; then \
+		rm $(MAN_EXEC_NAME); \
+	fi
+	@if [ -e "$(BONUS_EXEC_NAME)" ]; then \
+		rm $(BONUS_EXEC_NAME); \
+	fi
+
+bonus:
+	@make -C $(BONUS_PATH)
 
 re: fclean all
 
-shutup:
-	killall afplay 2> /dev/null || true
+rebonus: fclean bonus
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean bonus re rebonus
