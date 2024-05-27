@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egumus <egumus@student.42istanbul.com.t    +#+  +:+       +#+        */
+/*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 17:23:49 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/27 05:49:27 by egumus           ###   ########.fr       */
+/*   Updated: 2024/05/27 17:11:11 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,14 @@ void	ft_free_map(t_map *map)
 		ft_free_array(map->map);
 	if (map->flood_fill)
 		ft_free_array(map->flood_fill);
+	if (map->wall_textures)
+		free(map->wall_textures);
+	if (map->ceiling_str)
+		free(map->ceiling_str);
+	if (map->floor_str)
+		free(map->floor_str);
+	if (map->map_str)
+		free(map->map_str);
 	free(map);
 }
 
@@ -80,8 +88,6 @@ void	ft_free_data(t_data *data)
 	}
 	if (data->win_ptr)
 		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-	if (data->mlx_ptr)
-		free(data->mlx_ptr);
 	free_doors(data);
 	free(data);
 }

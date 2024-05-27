@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:56:59 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/24 19:32:52 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/27 16:52:25 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	ft_load_walls(t_data *data, char *texture, int index)
 	(int *)mlx_get_data_addr(data->images[index]->img, \
 	&data->images[index]->bits_per_pixel, &data->images[index]->line_length, \
 	&data->images[index]->endian);
+	free(texture);
 	return (0);
 }
 
@@ -46,7 +47,7 @@ void	ft_load_image(t_data *data, char *texture, int index)
 
 void	ft_load_other_images(t_data *data, int i)
 {
-	ft_load_image(data, "textures/fatih_kapi.xpm", i++);
+	ft_load_image(data, "textures/door.xpm", i++);
 	ft_load_image(data, "textures/sp01.xpm", i++);
 	ft_load_image(data, "textures/sp02.xpm", i++);
 	ft_load_image(data, "textures/sp04.xpm", i++);
