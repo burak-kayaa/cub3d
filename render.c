@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
+/*   By: egumus <egumus@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:57:16 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/25 15:02:50 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/27 06:42:42 by egumus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void	ft_fill_pixel(t_data *data, int x, int y, char type)
 		j = 0;
 		while (j < TILE_SIZE)
 		{
-			if (type == '1')
+			if (type == WALL_CHAR)
 				data->mlx_o_data[(y + j) * SCREENWIDTH + (x + i)] = 0x80FFFFFF;
-			else if (type == '2')
+			else if (type == DOOR_CHAR)
 				data->mlx_o_data[(y + j) * SCREENWIDTH + (x + i)] = 0x8000FF00;
 			else if (type == '*')
 				data->mlx_o_data[(y + j) * SCREENWIDTH + (x + i)] = 0x80FF0000;
@@ -50,13 +50,13 @@ void	ft_render_map_helper(t_data *data, int i, int j)
 	)
 		ft_fill_pixel(data, j * TILE_SIZE, i * TILE_SIZE, '*');
 	else if (data->map->map[data->ray->user_y - (MINIMAPHEIGHT / 2) + i]
-		[data->ray->user_x - (MINIMAPHEIGHT / 2) + j] == '1')
-		ft_fill_pixel(data, j * TILE_SIZE, i * TILE_SIZE, '1');
+		[data->ray->user_x - (MINIMAPHEIGHT / 2) + j] == WALL_CHAR)
+		ft_fill_pixel(data, j * TILE_SIZE, i * TILE_SIZE, WALL_CHAR);
 	else if (data->map->map[data->ray->user_y - (MINIMAPHEIGHT / 2) + i]
-		[data->ray->user_x - (MINIMAPHEIGHT / 2) + j] == '2')
-		ft_fill_pixel(data, j * TILE_SIZE, i * TILE_SIZE, '2');
+		[data->ray->user_x - (MINIMAPHEIGHT / 2) + j] == DOOR_CHAR)
+		ft_fill_pixel(data, j * TILE_SIZE, i * TILE_SIZE, DOOR_CHAR);
 	else
-		ft_fill_pixel(data, j * TILE_SIZE, i * TILE_SIZE, '0');
+		ft_fill_pixel(data, j * TILE_SIZE, i * TILE_SIZE, FLOOR_CHAR);
 }
 
 void	ft_render_map(t_data *data, int render_fc)

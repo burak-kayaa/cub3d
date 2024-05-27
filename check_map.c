@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
+/*   By: egumus <egumus@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 09:25:03 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/24 23:47:12 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/27 06:40:01 by egumus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 void	ft_check_stars_helper(t_data *data, int i, int j, char *line)
 {
-	if (j > 0 && !(line[j - 1] == '*' || line[j - 1] == '1'))
+	if (j > 0 && !(line[j - 1] == '*' || line[j - 1] == WALL_CHAR))
 		ft_error("Map is not closed from left", data);
 	if (j < (int)ft_strlen(line) - 1 && !(line[j + 1] == '*' \
-		|| line[j + 1] == '1'))
+		|| line[j + 1] == WALL_CHAR))
 		ft_error("Map is not closed from right", data);
 	if (i > 0 && !(data->map->map[i - 1][j] == '*' \
-		|| data->map->map[i - 1][j] == '1'))
+		|| data->map->map[i - 1][j] == WALL_CHAR))
 		ft_error("Map is not closed from up", data);
 	if (i < data->map->map_y - 1
 		&& !(data->map->map[i + 1][j] == '*' \
-		|| data->map->map[i + 1][j] == '1'))
+		|| data->map->map[i + 1][j] == WALL_CHAR))
 		ft_error("Map is not closed from down", data);
 }
 
@@ -63,7 +63,7 @@ void	ft_check_border(t_data *data)
 			if (i == 0 || i == data->map->map_y - 1 || j == 0 \
 			|| j == (int)ft_strlen(data->map->map[i]) - 1)
 			{
-				if (data->map->map[i][j] != '1' && data->map->map[i][j] != '*')
+				if (data->map->map[i][j] != WALL_CHAR && data->map->map[i][j] != '*')
 					ft_error("Map is not closed from border", data);
 			}
 			j++;

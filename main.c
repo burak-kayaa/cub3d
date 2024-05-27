@@ -6,7 +6,7 @@
 /*   By: egumus <egumus@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 02:10:46 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/27 03:36:06 by egumus           ###   ########.fr       */
+/*   Updated: 2024/05/27 13:13:27 by egumus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,22 @@
 
 void	ft_set_direction(t_data *data, char c)
 {
-	if (c == 'N')
+	if (c == NORTH_CHAR)
 	{
 		data->ray->dirx = -1;
 		data->ray->diry = 0;
 	}
-	else if (c == 'S')
+	else if (c == SOUTH_CHAR)
 	{
 		data->ray->dirx = 1;
 		data->ray->diry = 0;
 	}
-	else if (c == 'W')
+	else if (c == WEST_CHAR)
 	{
 		data->ray->dirx = 0;
 		data->ray->diry = -1;
 	}
-	else if (c == 'E')
+	else if (c == EAST_CHAR)
 	{
 		data->ray->dirx = 0;
 		data->ray->diry = 1;
@@ -38,22 +38,22 @@ void	ft_set_direction(t_data *data, char c)
 
 void	ft_set_plane(t_data *data, char c)
 {
-	if (c == 'N')
+	if (c == NORTH_CHAR)
 	{
 		data->ray->planex = 0;
 		data->ray->planey = 0.66;
 	}
-	else if (c == 'S')
+	else if (c == SOUTH_CHAR)
 	{
 		data->ray->planex = 0;
 		data->ray->planey = -0.66;
 	}
-	else if (c == 'W')
+	else if (c == WEST_CHAR)
 	{
 		data->ray->planex = -0.66;
 		data->ray->planey = 0;
 	}
-	else if (c == 'E')
+	else if (c == EAST_CHAR)
 	{
 		data->ray->planex = 0.66;
 		data->ray->planey = 0;
@@ -77,8 +77,8 @@ void	ft_get_player_location(t_data *data)
 		j = 0;
 		while (data->map->map[i][j])
 		{
-			if (data->map->map[i][j] == 'N' || data->map->map[i][j] == 'S'
-				|| data->map->map[i][j] == 'W' || data->map->map[i][j] == 'E')
+			if (data->map->map[i][j] == NORTH_CHAR || data->map->map[i][j] == SOUTH_CHAR
+				|| data->map->map[i][j] == WEST_CHAR || data->map->map[i][j] == EAST_CHAR)
 			{
 				data->ray->posx = i + 0.5;
 				data->ray->posy = j + 0.5;
@@ -105,7 +105,7 @@ int	main(int argc, char **argv)
 	ft_create_map(data);
 	ft_get_player_location(data);
 	ft_init_doors(data);
-	// system("afplay ./regular_show.mpeg &");
+	system("afplay ./regular_show.mpeg &");
 	ft_check_map(data);
 	mlx_mouse_move(data->win_ptr, SCREENWIDTH / 2, SCREENHEIGHT / 2);
 	mlx_loop_hook(data->mlx_ptr, key_hook, data);

@@ -6,7 +6,7 @@
 /*   By: egumus <egumus@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 16:07:35 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/27 05:46:13 by egumus           ###   ########.fr       */
+/*   Updated: 2024/05/27 06:43:40 by egumus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,15 @@
 # define SCREENWIDTH 1280
 # define MINIMAPWIDTH 7
 # define MINIMAPHEIGHT 7
+
+# define NORTH_CHAR 'N'
+# define SOUTH_CHAR 'S'
+# define WEST_CHAR 'W'
+# define EAST_CHAR 'E'
+# define SPRITE_CHAR 'U'
+# define WALL_CHAR '1'
+# define DOOR_CHAR '2'
+# define FLOOR_CHAR '0'
 
 # include <stdio.h>
 # include <unistd.h>

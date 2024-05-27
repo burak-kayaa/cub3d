@@ -6,7 +6,7 @@
 /*   By: egumus <egumus@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:56:36 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/27 05:27:47 by egumus           ###   ########.fr       */
+/*   Updated: 2024/05/27 06:40:57 by egumus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 void	ft_check_wallhit(t_data *data)
 {
-	if (data->map->map[data->ray->map_x][data->ray->map_y] == '1' ||
-		data->map->map[data->ray->map_x][data->ray->map_y] == '2')
+	if (data->map->map[data->ray->map_x][data->ray->map_y] == WALL_CHAR ||
+		data->map->map[data->ray->map_x][data->ray->map_y] == DOOR_CHAR)
 	{
-		if (data->map->map[data->ray->map_x][data->ray->map_y] == '2')
+		if (data->map->map[data->ray->map_x][data->ray->map_y] == DOOR_CHAR)
 			data->ray->wall = 2;
-		else if (data->map->map[data->ray->map_x][data->ray->map_y] == 'U')
+		else if (data->map->map[data->ray->map_x][data->ray->map_y] == SPRITE_CHAR)
 			data->ray->wall = 4;
 		else
 			data->ray->wall = 1;
