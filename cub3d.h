@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
+/*   By: egumus <egumus@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 16:07:35 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/24 19:43:57 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/27 05:46:13 by egumus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,13 @@ typedef struct s_images
 	int		height;
 }				t_images;
 
+typedef struct s_door
+{
+	int		x;
+	int		y;
+	int		is_open;
+}				t_door;
+
 typedef struct s_data
 {
 	void		*mlx_ptr;
@@ -128,6 +135,7 @@ typedef struct s_data
 	t_map		*map;
 	t_ray		*ray;
 	t_images	**images;
+	t_door		**doors;
 }				t_data;
 
 /* CHECK */
@@ -187,7 +195,7 @@ int		key_pressed(int keycode, void *param);
 int		key_released(int keycode, void *param);
 
 /* MOVE */
-int		is_character(char c, t_data *data);
+int		is_character(t_data *data, int x, int y);
 void	key_w(t_data *data);
 void	key_s(t_data *data);
 void	key_d(t_data *data);
@@ -202,6 +210,16 @@ int		mouse_hook(t_data *data);
 void	ft_fill_pixel(t_data *data, int x, int y, char type);
 void	ft_render_map(t_data *data, int render_fc);
 void	ft_render_hand(t_data *data);
+
+/* DOOR */
+void	ft_open_door_map(t_data *data, t_door *door, int x, int y);
+void	ft_close_door_map(t_data *data, t_door *door, int x, int y);
+void	ft_init_doors(t_data *data);
+void	ft_toggle_door(t_data *data, int door_index);
+void	ft_open_closest_door_by_player(t_data *data);
+t_door	*ft_get_door_by_location(t_data *data, int x, int y);
+int		ft_get_door_index(t_data *data, t_door *door);
+void	ft_close_all_doors(t_data *data);
 
 /* TEXTURE */
 

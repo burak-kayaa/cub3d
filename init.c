@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
+/*   By: egumus <egumus@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:56:55 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/24 19:42:52 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/27 00:28:18 by egumus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ int	ft_init(t_data *data)
 	data->map->ceiling = NULL;
 	data->map->flood_fill = NULL;
 	data->map->wall_textures = NULL;
+	data->doors = NULL;
 	if (ft_init_images(data))
 		return (free(data->ray), free(data->map), free(data), 1);
 	return (0);
