@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 02:10:46 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/27 17:12:24 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/27 18:17:43 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,10 +107,7 @@ int	main(int argc, char **argv)
 		return (printf("Error\n"), 0);
 	ft_create_map(data);
 	ft_get_player_location(data);
-	ft_init_doors(data);
 	ft_check_map(data);
-	system("afplay ./audios/regular_show.mpeg &");
-	mlx_mouse_move(data->win_ptr, SCREENWIDTH / 2, SCREENHEIGHT / 2);
 	mlx_loop_hook(data->mlx_ptr, key_hook, data);
 	mlx_hook(data->win_ptr, 3, 0, key_released, data);
 	mlx_hook(data->win_ptr, 2, 0, key_pressed, data);

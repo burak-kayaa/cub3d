@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:51:00 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/27 15:11:52 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/27 18:14:44 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,10 @@ void	flood_fill(t_data *data, int x, int y)
 	|| data->map->flood_fill[y][x] == 'F')
 		return ;
 	if (data->map->flood_fill[y][x] == FLOOR_CHAR \
-	|| data->map->flood_fill[y][x] == SPRITE_CHAR \
-	|| data->map->flood_fill[y][x] == DOOR_CHAR
 	|| data->map->flood_fill[y][x] == NORTH_CHAR \
-	|| data->map->flood_fill[y][x] == SOUTH_CHAR
+	|| data->map->flood_fill[y][x] == SOUTH_CHAR \
 	|| data->map->flood_fill[y][x] == WEST_CHAR \
-	|| data->map->flood_fill[y][x] == EAST_CHAR
+	|| data->map->flood_fill[y][x] == EAST_CHAR \
 	|| data->map->flood_fill[y][x] == WALL_CHAR)
 	{
 		data->map->flood_fill[y][x] = 'F';

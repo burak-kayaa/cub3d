@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egumus <egumus@student.42istanbul.com.t    +#+  +:+       +#+        */
+/*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:57:16 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/27 06:42:42 by egumus           ###   ########.fr       */
+/*   Updated: 2024/05/27 18:44:44 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,12 +95,12 @@ void	ft_render_hand_helper(t_data *data, int color, int y, int x)
 			|| data->s_pressed || data->w_pressed)
 		{
 			if ((i / 500000) % 2 == 1)
-				data->mlx_o_data[(y + SCREENHEIGHT - 339)
+				data->mlx_o_data[(y + SCREENHEIGHT - 329 + move)
 					* (SCREENWIDTH) + \
-					(x + (SCREENHEIGHT + 575 - move))] = color;
+					(x + (SCREENHEIGHT + 585))] = color;
 			else
-				data->mlx_o_data[(y + SCREENHEIGHT - 339)
-					* SCREENWIDTH + (x + (SCREENHEIGHT + 575 + move))] = color;
+				data->mlx_o_data[(y + SCREENHEIGHT - 329 - move)
+					* SCREENWIDTH + (x + (SCREENHEIGHT + 585))] = color;
 			i++;
 		}
 		else

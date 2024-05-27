@@ -1,9 +1,9 @@
-SRCS	= check.c draw.c doors.c draw_helper.c init.c init_helper.c init_helper2.c ft_split_new_lines.c main.c mlx_funcs.c move.c move_helper.c render.c texture.c utils.c wall_check.c draw_sp.c load.c check_map.c check_map_helper.c flood_fill.c free.c doors_helper.c
+SRCS	= check.c draw.c draw_helper.c init.c init_helper.c init_helper2.c ft_split_new_lines.c main.c mlx_funcs.c move.c move_helper.c texture.c utils.c load.c check_map.c check_map_helper.c flood_fill.c free.c
 OBJS	= $(SRCS:.c=.o)
 
 NAME	= cub3D
 CC		= gcc
-CFLAGS	= -Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS	= -Wall -Wextra -Werror -g
 RM		= rm -f
 MLX		= ../mlx/libmlx.a
 MLX_DIR	= ../mlx

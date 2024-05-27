@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:57:05 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/27 17:00:04 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/27 18:34:43 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int	ft_exit(void *param)
 
 	data = (t_data *)param;
 	ft_free_data(data);
-	system("killall afplay");
 	exit(0);
 	return (0);
 }
@@ -28,40 +27,11 @@ int	key_hook(void *param)
 	t_data	*data;
 
 	data = (t_data *)param;
-	ft_render_map(data, 1);
-	if (ft_player_move(data))
-		return (1);
+	ft_fill_floor_and_ceiling(data);
+	ft_move(data);
 	ft_ray_casting(data);
-	ft_render_map(data, 0);
-	ft_render_hand(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->mlx_img, 0, 0);
 	return (0);
-}
-
-int	mouse_hook(t_data *data)
-{
-	int	*x;
-	int	*y;
-
-	x = malloc(sizeof(int));
-	y = malloc(sizeof(int));
-	mlx_mouse_get_pos(data->win_ptr, x, y);
-	if (*x > SCREENWIDTH / 2 + 100)
-	{
-		data->right_mouse_pressed = 1;
-		data->left_mouse_pressed = 0;
-	}
-	else if (*x < SCREENWIDTH / 2 - 100)
-	{
-		data->left_mouse_pressed = 1;
-		data->right_mouse_pressed = 0;
-	}
-	else
-	{
-		data->left_mouse_pressed = 0;
-		data->right_mouse_pressed = 0;
-	}
-	return (free(x), free(y), 0);
 }
 
 int	key_pressed(int keycode, void *param)

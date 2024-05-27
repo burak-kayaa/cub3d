@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:57:12 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/25 02:06:58 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/27 18:34:47 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,19 +52,12 @@ void	ft_move(t_data *data)
 		key_w(data);
 	if (data->s_pressed)
 		key_s(data);
-	if (data->left_pressed || data->left_mouse_pressed)
+	if (data->left_pressed)
 		key_left(data);
-	if (data->right_pressed || data->right_mouse_pressed)
+	if (data->right_pressed)
 		key_right(data);
 	if (data->a_pressed)
 		key_a(data);
 	if (data->d_pressed)
 		key_d(data);
-}
-
-int	ft_player_move(t_data *data)
-{
-	ft_move(data);
-	mouse_hook(data);
-	return (0);
 }

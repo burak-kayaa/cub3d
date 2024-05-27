@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egumus <egumus@student.42istanbul.com.t    +#+  +:+       +#+        */
+/*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:57:21 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/27 07:05:46 by egumus           ###   ########.fr       */
+/*   Updated: 2024/05/27 18:37:04 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,31 +50,15 @@ void	ft_draw_wall_texture(t_data *data, int x, int tex_index)
 	}
 }
 
-void	ft_draw_wall_side(t_data *data, int x, int f_flag)
-{
-	if (f_flag)
-	{
-		if (data->ray->side == 0 && data->ray->raydirx < 0)
-			ft_draw_wall_texture(data, x, f_flag);
-	}
-	else
-	{
-		if (data->ray->side == 0 && data->ray->raydirx > 0)
-			ft_draw_wall_texture(data, x, 1);
-		else if (data->ray->side == 0 && data->ray->raydirx < 0)
-			ft_draw_wall_texture(data, x, 2);
-		else if (data->ray->side == 1 && data->ray->raydiry > 0)
-			ft_draw_wall_texture(data, x, 3);
-		else
-			ft_draw_wall_texture(data, x, 4);
-	}
-}
-
-void	ft_texture(t_data *data, int x, int f_flag)
+void	ft_draw_wall_side(t_data *data, int x)
 {
 	ft_texture_helper(data);
-	if (data->ray->wall == 1 || f_flag)
-		ft_draw_wall_side(data, x, f_flag);
-	else if (data->ray->wall == 2)
-		ft_draw_wall_texture(data, x, 5);
+	if (data->ray->side == 0 && data->ray->raydirx > 0)
+		ft_draw_wall_texture(data, x, 1);
+	else if (data->ray->side == 0 && data->ray->raydirx < 0)
+		ft_draw_wall_texture(data, x, 2);
+	else if (data->ray->side == 1 && data->ray->raydiry > 0)
+		ft_draw_wall_texture(data, x, 3);
+	else
+		ft_draw_wall_texture(data, x, 4);
 }

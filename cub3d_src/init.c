@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:56:55 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/27 15:12:53 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/27 18:14:18 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	ft_init_image_array(t_data *data)
 		if (ft_load_walls(data, texture, i + 1))
 			return (ft_free_images(data, i), 1);
 	}
-	return (ft_load_other_images(data, i + 1), 0);
+	return (0);
 }
 
 int	ft_create_main_image(t_data *data)
@@ -87,8 +87,6 @@ int	ft_init(t_data *data)
 	data->e_pressed = 0;
 	data->left_pressed = 0;
 	data->right_pressed = 0;
-	data->left_mouse_pressed = 0;
-	data->right_mouse_pressed = 0;
 	data->is_door_open = 0;
 	data->ray = malloc(sizeof(t_ray));
 	ft_init_ray(data->ray);
@@ -98,7 +96,6 @@ int	ft_init(t_data *data)
 	data->map->ceiling = NULL;
 	data->map->flood_fill = NULL;
 	data->map->wall_textures = NULL;
-	data->doors = NULL;
 	if (ft_init_images(data))
 		return (free(data->ray), free(data->map), free(data), 1);
 	return (0);

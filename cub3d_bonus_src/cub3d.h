@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 16:07:35 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/27 15:40:32 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/27 18:46:11 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,6 @@ typedef struct s_ray
 	double		diry;
 	double		planex;
 	double		planey;
-	int			key_w;
-	int			key_s;
-	int			key_left;
-	int			key_right;
 	double		camerax;
 	double		raydirx;
 	double		raydiry;
@@ -99,8 +95,6 @@ typedef struct s_ray
 	int			texnum;
 	double		texstep;
 	double		texpos;
-	int			key_a;
-	int			key_d;
 	int			user_x;
 	int			user_y;
 }	t_ray;
@@ -216,7 +210,6 @@ int		ft_player_move(t_data *data);
 int		mouse_hook(t_data *data);
 
 /* RENDER */
-void	ft_fill_pixel(t_data *data, int x, int y, char type);
 void	ft_render_map(t_data *data, int render_fc);
 void	ft_render_hand(t_data *data);
 
@@ -229,7 +222,6 @@ void	ft_close_all_doors(t_data *data);
 int		ft_is_player_in_or_around_wall(t_data *data, t_door *door);
 
 /* TEXTURE */
-
 void	ft_texture_helper(t_data *data);
 void	ft_draw_wall_texture(t_data *data, int x, int tex_index);
 void	ft_draw_wall_side(t_data *data, int x, int f_flag);

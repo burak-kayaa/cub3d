@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 17:23:49 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/27 17:11:11 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/27 18:28:32 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,25 +46,6 @@ void	ft_free_map(t_map *map)
 	free(map);
 }
 
-void	free_doors(t_data *data)
-{
-	t_door	*door;
-	int		i;
-
-	i = 0;
-	if (data->doors)
-	{
-		door = data->doors[i];
-		while (door)
-		{
-			free(door);
-			i++;
-			door = data->doors[i];
-		}
-		free(data->doors);
-	}
-}
-
 void	ft_free_data(t_data *data)
 {
 	int	i;
@@ -88,7 +69,6 @@ void	ft_free_data(t_data *data)
 	}
 	if (data->win_ptr)
 		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-	free_doors(data);
 	free(data);
 }
 

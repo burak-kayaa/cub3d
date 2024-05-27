@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:56:17 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/27 15:19:44 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/27 18:28:20 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,11 @@ void	check_map_characters(t_data *data)
 		{
 			if (data->map->map[i][j] != FLOOR_CHAR
 				&& data->map->map[i][j] != WALL_CHAR
-				&& data->map->map[i][j] != DOOR_CHAR
 				&& data->map->map[i][j] != NORTH_CHAR
 				&& data->map->map[i][j] != SOUTH_CHAR
 				&& data->map->map[i][j] != WEST_CHAR
 				&& data->map->map[i][j] != EAST_CHAR
-				&& data->map->map[i][j] != ' '
-				&& data->map->map[i][j] != SPRITE_CHAR)
+				&& data->map->map[i][j] != ' ')
 				ft_error("Map characters are not correct", data);
 			j++;
 		}

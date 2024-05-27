@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:57:09 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/27 15:19:12 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/27 18:25:54 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	is_character(char c)
 {
 	if (c == NORTH_CHAR || c == SOUTH_CHAR
-		|| c == EAST_CHAR || c == WEST_CHAR || c == SPRITE_CHAR)
+		|| c == EAST_CHAR || c == WEST_CHAR)
 		return (1);
 	return (0);
 }
