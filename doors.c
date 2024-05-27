@@ -6,7 +6,7 @@
 /*   By: egumus <egumus@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 00:28:44 by egumus            #+#    #+#             */
-/*   Updated: 2024/05/27 05:45:49 by egumus           ###   ########.fr       */
+/*   Updated: 2024/05/27 06:42:42 by egumus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,18 @@
 
 void	ft_open_door_map(t_data *data, t_door *door, int x, int y)
 {
-	if (data->map->map[y][x] == '2')
+	if (data->map->map[y][x] == DOOR_CHAR)
 	{
-		data->map->map[y][x] = '0';
+		data->map->map[y][x] = FLOOR_CHAR;
 		door->is_open = 1;
 	}
 }
 
 void	ft_close_door_map(t_data *data, t_door *door, int x, int y)
 {
-	if (data->map->map[y][x] == '0')
+	if (data->map->map[y][x] == FLOOR_CHAR)
 	{
-		data->map->map[y][x] = '2';
+		data->map->map[y][x] = DOOR_CHAR;
 		door->is_open = 0;
 	}
 }
@@ -43,7 +43,7 @@ void	ft_init_doors(t_data *data)
 		x = -1;
 		while (++x < (int)ft_strlen(data->map->map[y]))
 		{
-			if (data->map->map[y][x] == '2')
+			if (data->map->map[y][x] == DOOR_CHAR)
 				count++;
 		}
 	}
@@ -57,7 +57,7 @@ void	ft_init_doors(t_data *data)
 		x = -1;
 		while (++x < (int)ft_strlen(data->map->map[y]))
 		{
-			if (data->map->map[y][x] == '2')
+			if (data->map->map[y][x] == DOOR_CHAR)
 			{
 				data->doors[count] = malloc(sizeof(t_door));
 				if (!data->doors[count])
@@ -137,8 +137,12 @@ int	ft_is_player_in_or_around_wall(t_data *data, t_door *door)
 	player_y = (int)data->ray->posy;
 	if ((door->y + 1 == player_x && door->x == player_y)
 		|| (door->y - 1 == player_x && door->x == player_y)
-		|| (door->y == player_x && door->x + 1 == player_y)
+		|| (door->y == player_x && door->x + 1 == player_y) 
 		|| (door->y == player_x && door->x - 1 == player_y)
+		|| (door->y + 1 == player_x && door->x + 1 == player_y)
+		|| (door->y + 1 == player_x && door->x - 1 == player_y)
+		|| (door->y - 1 == player_x && door->x + 1 == player_y)
+		|| (door->y - 1 == player_x && door->x - 1 == player_y)
 		|| (door->y == player_x && door->x == player_y))
 		return (1);
 	return (0);
@@ -177,7 +181,6 @@ void	ft_open_closest_door_by_player(t_data *data)
 	{
 		if (ft_is_player_in_or_around_wall(data, door))
 		{
-			printf("opening door for x: %d, y: %d\n", door->x, door->y);
 			ft_toggle_door(data, i);
 			break ;
 		}

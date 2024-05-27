@@ -6,7 +6,7 @@
 /*   By: egumus <egumus@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:56:17 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/27 04:37:10 by egumus           ###   ########.fr       */
+/*   Updated: 2024/05/27 06:42:42 by egumus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	player(char c)
 {
-	if (c == 'N' || c == 'S' || c == 'W' || c == 'E')
+	if (c == NORTH_CHAR || c == SOUTH_CHAR || c == WEST_CHAR || c == EAST_CHAR)
 		return (1);
 	return (0);
 }
@@ -53,11 +53,11 @@ void	check_map_characters(t_data *data)
 		j = 0;
 		while (j < (int)ft_strlen(data->map->map[i]))
 		{
-			if (data->map->map[i][j] != '0' && data->map->map[i][j] != '1'
-				&& data->map->map[i][j] != '2' && data->map->map[i][j] != 'N'
-				&& data->map->map[i][j] != 'S' && data->map->map[i][j] != 'W'
-				&& data->map->map[i][j] != 'E' && data->map->map[i][j] != ' '
-				&& data->map->map[i][j] != 'U')
+			if (data->map->map[i][j] != FLOOR_CHAR && data->map->map[i][j] != WALL_CHAR
+				&& data->map->map[i][j] != DOOR_CHAR && data->map->map[i][j] != NORTH_CHAR
+				&& data->map->map[i][j] != SOUTH_CHAR && data->map->map[i][j] != WEST_CHAR
+				&& data->map->map[i][j] != EAST_CHAR && data->map->map[i][j] != ' '
+				&& data->map->map[i][j] != SPRITE_CHAR)
 				ft_error("Map characters are not correct", data);
 			j++;
 		}

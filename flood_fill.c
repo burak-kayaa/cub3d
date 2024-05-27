@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   flood_fill.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
+/*   By: egumus <egumus@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:51:00 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/24 23:47:14 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/27 06:42:42 by egumus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	check_flood(t_data *data)
 		while (j < (int)ft_strlen(data->map->map[i]))
 		{
 			if (player(data->map->flood_fill[i][j])
-			|| data->map->flood_fill[i][j] == '0' \
-			|| data->map->flood_fill[i][j] == '1')
+			|| data->map->flood_fill[i][j] == FLOOR_CHAR \
+			|| data->map->flood_fill[i][j] == WALL_CHAR)
 				ft_error("Multiple maps", data);
 			j++;
 		}
@@ -39,11 +39,11 @@ void	flood_fill(t_data *data, int x, int y)
 	|| x >= (int)ft_strlen(data->map->map[y]) \
 	|| data->map->flood_fill[y][x] == 'F')
 		return ;
-	if (data->map->flood_fill[y][x] == '0' \
-	|| data->map->flood_fill[y][x] == 'U' \
-	|| data->map->flood_fill[y][x] == '2' || data->map->flood_fill[y][x] == 'N' \
-	|| data->map->flood_fill[y][x] == 'S' || data->map->flood_fill[y][x] == 'W' \
-	|| data->map->flood_fill[y][x] == 'E' || data->map->flood_fill[y][x] == '1')
+	if (data->map->flood_fill[y][x] == FLOOR_CHAR \
+	|| data->map->flood_fill[y][x] == SPRITE_CHAR \
+	|| data->map->flood_fill[y][x] == DOOR_CHAR || data->map->flood_fill[y][x] == NORTH_CHAR \
+	|| data->map->flood_fill[y][x] == SOUTH_CHAR || data->map->flood_fill[y][x] == WEST_CHAR \
+	|| data->map->flood_fill[y][x] == EAST_CHAR || data->map->flood_fill[y][x] == WALL_CHAR)
 	{
 		data->map->flood_fill[y][x] = 'F';
 		flood_fill(data, x + 1, y);
