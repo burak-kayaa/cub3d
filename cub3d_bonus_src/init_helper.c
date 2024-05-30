@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:56:48 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/30 17:39:24 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/30 18:51:22 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_get_floor_ceiling(t_data *data)
 			|| ft_atoi(data->map->ceiling[i]) > 255
 			|| ft_atoi(data->map->floor[i]) < 0
 			|| ft_atoi(data->map->ceiling[i]) < 0)
-			ft_error("zort", data);
+			ft_error("Zorted perfectly.", data);
 	data->map->floor_color = ft_atoi(data->map->floor[0]) * 65536 + \
 		ft_atoi(data->map->floor[1]) * 256 + ft_atoi(data->map->floor[2]);
 	data->map->ceiling_color = ft_atoi(data->map->ceiling[0]) * 65536 + \

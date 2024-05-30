@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 02:10:46 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/27 18:17:43 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/30 18:48:16 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,12 +99,12 @@ int	main(int argc, char **argv)
 	t_data	*data;
 
 	if (argc != 2)
-		return (printf("Error\n"), 0);
+		return (printf("Error\n"), 1);
 	data = malloc(sizeof(t_data));
 	data->map_path = argv[1];
 	check_extension(data->map_path);
 	if (ft_init(data))
-		return (printf("Error\n"), 0);
+		return (ft_error("Malloc", data), 1);
 	ft_create_map(data);
 	ft_get_player_location(data);
 	ft_check_map(data);

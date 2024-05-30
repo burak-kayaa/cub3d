@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:56:55 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/30 17:22:12 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/30 19:07:04 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	ft_init_image_array(t_data *data)
 
 	if (ft_read_and_process_map(data))
 		return (1);
-	data->images = calloc((TOTAL_TEXTURES + 1), sizeof(t_images *));
+	data->images = ft_calloc((TOTAL_TEXTURES + 1), sizeof(t_images *));
 	if (!data->images)
 		return (1);
 	i = -1;
@@ -42,7 +42,7 @@ int	ft_init_image_array(t_data *data)
 	{
 		line = data->map->wall_textures[i];
 		if (ft_check_and_load_wall_textures(data, line))
-			return (ft_free_images(data, i), 1);
+			return (1);
 	}
 	return (0);
 }
@@ -52,7 +52,7 @@ int	ft_create_main_image(t_data *data)
 	data->mlx_img = mlx_new_image(data->mlx_ptr, SCREENWIDTH, SCREENHEIGHT);
 	data->images[0] = malloc(sizeof(t_images));
 	if (!data->images[0])
-		return (ft_free_images(data, TOTAL_TEXTURES + 1), 1);
+		return (1);
 	data->mlx_o_data = (int *)mlx_get_data_addr(data->mlx_img, \
 	&data->images[0]->bits_per_pixel, &data->images[0]->line_length, \
 	&data->images[0]->endian);
@@ -71,9 +71,6 @@ int	ft_init_images(t_data *data)
 
 int	ft_init(t_data *data)
 {
-	data->mlx_ptr = mlx_init();
-	data->win_ptr = mlx_new_window(data->mlx_ptr, \
-		SCREENWIDTH, SCREENHEIGHT, "mlx 42");
 	data->w_pressed = 0;
 	data->a_pressed = 0;
 	data->s_pressed = 0;
@@ -90,7 +87,10 @@ int	ft_init(t_data *data)
 	data->map->ceiling = NULL;
 	data->map->flood_fill = NULL;
 	data->map->wall_textures = NULL;
+	data->mlx_ptr = mlx_init();
+	data->win_ptr = mlx_new_window(data->mlx_ptr, \
+		SCREENWIDTH, SCREENHEIGHT, "mlx 42");
 	if (ft_init_images(data))
-		return (free(data->ray), free(data->map), free(data), 1);
+		return (1);
 	return (0);
 }

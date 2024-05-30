@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 16:07:35 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/30 17:11:43 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/30 17:47:42 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,7 @@ void	ft_print_map(char **map);
 void	flood_fill(t_data *data, int y, int x);
 void	check_flood(t_data *data);
 
+void	ft_free_map(t_map *map);
 /* DRAW */
 void	ft_check_wallhit(t_data *data);
 void	ft_wallhit(t_data *data);

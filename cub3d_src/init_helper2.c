@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:56:52 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/30 17:20:19 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/30 18:28:39 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,9 @@ int	ft_check_and_load_wall_textures(t_data *data, char *line)
 	else if (ft_strncmp(line, "EA", 2) == 0)
 		err = ft_load_walls(data, texture, 4);
 	else
-		err = 1;
-	free(line);
+	{
+		free(texture);
+		return (1);
+	}
 	return (err);
 }
