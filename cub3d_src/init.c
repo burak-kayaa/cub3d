@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:56:55 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/30 17:11:26 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/30 17:22:12 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	ft_init_image_array(t_data *data)
 
 	if (ft_read_and_process_map(data))
 		return (1);
-	data->images = malloc(sizeof(t_images *) * (TOTAL_TEXTURES + 1));
+	data->images = calloc((TOTAL_TEXTURES + 1), sizeof(t_images *));
 	if (!data->images)
 		return (1);
 	i = -1;
