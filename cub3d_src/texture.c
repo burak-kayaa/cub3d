@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:57:21 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/30 16:39:26 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/30 17:07:46 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ void	ft_draw_wall_side(t_data *data, int x)
 {
 	ft_texture_helper(data);
 	if (data->ray->side == 0 && data->ray->raydirx > 0)
-		ft_draw_wall_texture(data, x, 1);
-	else if (data->ray->side == 0 && data->ray->raydirx < 0)
 		ft_draw_wall_texture(data, x, 2);
+	else if (data->ray->side == 0 && data->ray->raydirx < 0)
+		ft_draw_wall_texture(data, x, 1);
 	else if (data->ray->side == 1 && data->ray->raydiry > 0)
-		ft_draw_wall_texture(data, x, 3);
-	else
 		ft_draw_wall_texture(data, x, 4);
+	else
+		ft_draw_wall_texture(data, x, 3);
 }

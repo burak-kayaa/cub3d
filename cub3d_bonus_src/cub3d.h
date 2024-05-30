@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 16:07:35 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/30 16:18:17 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/30 17:14:20 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,6 +189,7 @@ void	ft_init_ray(t_ray *ray);
 int		ft_is_multiple_map(char *str);
 int		read_and_concatenate_map(int fd, char **result);
 int		process_map_data(t_data *data, char *map_data);
+int		ft_check_and_load_wall_textures(t_data *data, char *line);
 
 /* MLX */
 int		ft_exit(void *param);

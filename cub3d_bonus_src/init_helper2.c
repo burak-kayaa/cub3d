@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:56:52 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/27 21:07:24 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/30 17:13:13 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,26 @@ int	process_map_data(t_data *data, char *map_data)
 	ft_free_array(t);
 	ft_free_array(tmp2);
 	return (free(map_data), free(_2map), 0);
+}
+
+int	ft_check_and_load_wall_textures(t_data *data, char *line)
+{
+	char	*texture;
+	char	*texture_tmp;
+	int		err;
+
+	err = 0;
+	texture_tmp = ft_strdup(line + 2);
+	texture = ft_strtrim(texture_tmp, " ");
+	free(texture_tmp);
+	if (ft_strncmp(line, "NO", 2) == 0)
+		err = ft_load_walls(data, texture, 1);
+	else if (ft_strncmp(line, "SO", 2) == 0)
+		err = ft_load_walls(data, texture, 2);
+	else if (ft_strncmp(line, "WE", 2) == 0)
+		err = ft_load_walls(data, texture, 3);
+	else if (ft_strncmp(line, "EA", 2) == 0)
+		err = ft_load_walls(data, texture, 4);
+	free(line);
+	return (err);
 }
