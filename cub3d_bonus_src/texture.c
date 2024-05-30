@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:57:21 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/30 16:17:57 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/30 16:39:40 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,8 @@ void	ft_texture_helper(t_data *data)
 
 void	ft_draw_wall_texture(t_data *data, int x, int tex_index)
 {
-	static int	i;
 	int			texy;
 
-	i = 0;
 	while (data->ray->drawstart < data->ray->drawend)
 	{
 		texy = (int)data->ray->texpos & 63;
@@ -45,7 +43,6 @@ void	ft_draw_wall_texture(t_data *data, int x, int tex_index)
 			data->mlx_o_data[data->ray->drawstart * SCREENWIDTH + x]
 				= data->images[tex_index]->addr[64 * texy + data->ray->tex_x];
 		data->ray->drawstart++;
-		i++;
 	}
 }
 
