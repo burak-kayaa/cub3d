@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egumus <egumus@student.42istanbul.com.t    +#+  +:+       +#+        */
+/*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:57:21 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/27 07:05:46 by egumus           ###   ########.fr       */
+/*   Updated: 2024/05/30 16:17:57 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	ft_texture_helper(t_data *data)
 {
 	double	wallx;
 
-	data->ray->texnum = data->map->map[data->ray->map_x][data->ray->map_y] - 1;
 	if (data->ray->side == 0)
 		wallx = data->ray->posy + data->ray->perpwalldist * data->ray->raydiry;
 	else

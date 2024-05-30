@@ -6,7 +6,7 @@
 /*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 16:07:35 by burkaya           #+#    #+#             */
-/*   Updated: 2024/05/27 18:46:11 by burkaya          ###   ########.fr       */
+/*   Updated: 2024/05/30 16:18:17 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ typedef struct s_ray
 	int			drawstart;
 	int			drawend;
 	int			tex_x;
-	int			texnum;
 	double		texstep;
 	double		texpos;
 	int			user_x;

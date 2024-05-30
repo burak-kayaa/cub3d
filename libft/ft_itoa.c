@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egumus <egumus@student.42istanbul.com.t    +#+  +:+       +#+        */
+/*   By: burkaya <burkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 17:23:21 by egumus            #+#    #+#             */
-/*   Updated: 2024/05/27 06:43:07 by egumus           ###   ########.fr       */
+/*   Updated: 2024/05/30 16:19:42 by burkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,11 @@ char	*ft_itoa(int n)
 	char	*str;
 	int		level;
 	long	nb;
-	size_t	i;
 
 	nb = n;
 	str = (char *)malloc(sizeof(char) * (count_digit_and_is_negative(nb) + 1));
 	if (!str)
 		return (NULL);
-	i = 0;
 	level = 0;
 	if (n < 0)
 	{
